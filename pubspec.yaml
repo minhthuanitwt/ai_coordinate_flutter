@@ -1,0 +1,34 @@
+name: ai_coordinate_flutter
+description: "Standalone Flutter app bootstrap for ai_coordinate_flutter."
+publish_to: 'none'
+version: 1.0.0+0
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  auto_route: ^9.3.0
+  flutter_hooks: ^0.21.2
+  hooks_riverpod: ^2.6.1
+  logger: ^2.5.0
+  shared_preferences: ^2.5.3
+  supabase_flutter: ^2.9.1
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  auto_route_generator: ^9.0.0
+  build_runner: ^2.4.15
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/i18n/en.i18n.yaml
+    - assets/i18n/vi.i18n.yaml

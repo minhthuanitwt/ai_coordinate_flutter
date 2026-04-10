@@ -1,0 +1,33 @@
+app:
+  name: "ai_coordinate_flutter"
+
+common:
+  loading: "Đang tải"
+  retry: "Thử lại"
+  close: "Đóng"
+
+home:
+  title: "ai_coordinate_flutter"
+  subtitle: "Bản bootstrap Flutter độc lập với kiến trúc sẵn sàng cho Supabase."
+  cards:
+    project:
+      title: "Trạng thái project"
+      body: "Project này độc lập với app_flutter và đã sẵn sàng cho hướng tích hợp Supabase."
+    backend:
+      title: "Backend"
+      configured: "Supabase đã được cấu hình cho bản build này."
+      missing: "Bản build này chưa có giá trị môi trường Supabase."
+      hint: "Truyền SUPABASE_URL và SUPABASE_ANON_KEY qua --dart-define để bật backend thật."
+    structure:
+      title: "Cấu trúc tham chiếu"
+      body: "Layout thư mục bám theo pattern đã được kiểm chứng từ app_flutter: routes, presentation, providers, services, themes và domain repositories."
+    nextSteps:
+      title: "Bước tiếp theo"
+      item1: "Thêm các feature module vào đúng nhóm thư mục đã mirror."
+      item2: "Khai báo bảng và migration ở Supabase."
+      item3: "Triển khai repository contract trên lớp service của Supabase client."
+  chips:
+    standalone: "App độc lập"
+    supabase: "Supabase-first"
+    riverpod: "Riverpod"
+    autoroute: "AutoRoute"

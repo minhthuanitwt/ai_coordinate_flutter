@@ -1,0 +1,33 @@
+app:
+  name: "ai_coordinate_flutter"
+
+common:
+  loading: "Loading"
+  retry: "Retry"
+  close: "Close"
+
+home:
+  title: "ai_coordinate_flutter"
+  subtitle: "Standalone Flutter bootstrap with Supabase-ready architecture."
+  cards:
+    project:
+      title: "Project Status"
+      body: "This project is independent from app_flutter and is prepared for Supabase integration."
+    backend:
+      title: "Backend"
+      configured: "Supabase is configured for this build."
+      missing: "Supabase environment values are missing for this build."
+      hint: "Pass SUPABASE_URL and SUPABASE_ANON_KEY with --dart-define to enable the live backend."
+    structure:
+      title: "Mirrored Structure"
+      body: "The folder layout follows the proven app_flutter patterns: routes, presentation, providers, services, themes, and domain repositories."
+    nextSteps:
+      title: "Next Steps"
+      item1: "Add feature modules into the mirrored folders."
+      item2: "Model tables and migrations in Supabase."
+      item3: "Implement repository contracts on top of Supabase client services."
+  chips:
+    standalone: "Standalone app"
+    supabase: "Supabase-first"
+    riverpod: "Riverpod"
+    autoroute: "AutoRoute"
