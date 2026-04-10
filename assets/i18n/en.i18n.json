@@ -1,0 +1,78 @@
+{
+  "appName": "ai_coordinate_flutter",
+  "loading": "Loading",
+  "defaultUserLabel": "creator",
+  "shell": {
+    "subtitle": "Coordinate your AI workflow across one lightweight app.",
+    "headerTitle": "Today on ai_coordinate_flutter",
+    "footerTagline": "Phase-1 Flutter shell mirrored from the reference Next.js product."
+  },
+  "nav": {
+    "home": "Home",
+    "coordinate": "Coordinate",
+    "challenge": "Challenge",
+    "notifications": "Notifications",
+    "myPage": "My Page"
+  },
+  "home": {
+    "headline": "Create, coordinate, and ship from one place.",
+    "lead": "A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.",
+    "feedTitle": "Latest updates",
+    "feedAction": "See all",
+    "bannerChip": "Featured",
+    "bannerFallbackTitle": "Open the latest highlight",
+    "feedMissingPreview": "This post is available without a prompt or caption preview yet.",
+    "configTitle": "Supabase configuration required",
+    "configBody": "Home now reads live banners and public posts from Supabase. Provide SUPABASE_URL and SUPABASE_ANON_KEY for this build.",
+    "errorTitle": "Unable to load Home",
+    "errorBody": "The app could not fetch banners or public posts right now. Try again shortly.",
+    "emptyTitle": "Nothing to show yet",
+    "emptyBody": "There are no active banners or posted images available right now.",
+    "linkUnavailable": "This destination is not available inside the Flutter app yet.",
+    "linkError": "Unable to open the selected banner link.",
+    "postedAtLabel": "Posted",
+    "creatorLabel": "Creator",
+    "viewsLabel": "Views"
+  },
+  "coordinate": {
+    "title": "Coordinate workspace",
+    "description": "This protected area will host collaboration lanes, initiative tracking, and shared execution views.",
+    "badge": "Protected preview",
+    "boardTitle": "Coordinate outputs",
+    "boardSubtitle": "Review your latest coordinate generations from Supabase in one owner-facing board.",
+    "summaryTitle": "Your latest coordinate library",
+    "summaryCountPrefix": "Items loaded",
+    "postedBadge": "Posted",
+    "draftBadge": "Draft",
+    "promptLabel": "Prompt",
+    "missingPrompt": "No prompt was saved for this item.",
+    "createdAtLabel": "Created",
+    "modelLabel": "Model",
+    "sourceLabel": "Source stock",
+    "emptyTitle": "No coordinate items yet",
+    "emptyBody": "Generate or sync your first coordinate output in Supabase, then return here to manage it.",
+    "errorTitle": "Unable to load coordinate items",
+    "errorBody": "The board could not fetch your latest items right now. Try again in a moment.",
+    "configTitle": "Supabase configuration required",
+    "configBody": "This board reads live data from Supabase. Provide SUPABASE_URL and SUPABASE_ANON_KEY for this build."
+  },
+  "common": {
+    "retryButton": "Try again",
+    "loadMoreButton": "Load more"
+  },
+  "challenge": {
+    "title": "Challenge board",
+    "description": "This protected page is reserved for challenge campaigns, submissions, and progress checkpoints.",
+    "badge": "Members only"
+  },
+  "notifications": {
+    "title": "Notifications center",
+    "description": "This section will collect alerts, event updates, and collaboration signals in one mobile-first view.",
+    "badge": "Realtime ready"
+  },
+  "myPage": {
+    "title": "My page",
+    "description": "This protected profile area will surface account details, creator identity, and activity snapshots.",
+    "badge": "Account space"
+  }
+}
