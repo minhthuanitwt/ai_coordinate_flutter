@@ -123,11 +123,11 @@ class TranslationsHomeEn {
 
 	// Translations
 
-	/// en: 'Create, coordinate, and ship from one place.'
-	String get headline => 'Create, coordinate, and ship from one place.';
+	/// en: 'Persta'
+	String get headline => 'Persta';
 
-	/// en: 'A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.'
-	String get lead => 'A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.';
+	/// en: 'An AI styling platform for the looks and characters you want to create. '
+	String get lead => 'An AI styling platform for the looks and characters you want to create.\n\n';
 
 	/// en: 'Latest updates'
 	String get feed_title => 'Latest updates';
@@ -413,8 +413,8 @@ extension on Translations {
 			'nav.challenge' => 'Challenge',
 			'nav.notifications' => 'Notifications',
 			'nav.my_page' => 'My Page',
-			'home.headline' => 'Create, coordinate, and ship from one place.',
-			'home.lead' => 'A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.',
+			'home.headline' => 'Persta',
+			'home.lead' => 'An AI styling platform for the looks and characters you want to create.\n\n',
 			'home.feed_title' => 'Latest updates',
 			'home.filters.newest' => 'Newest',
 			'home.filters.recommended' => 'Recommended',

@@ -19,8 +19,8 @@
     "myPage": "My Page"
   },
   "home": {
-    "headline": "Create, coordinate, and ship from one place.",
-    "lead": "A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.",
+    "headline": "Persta",
+    "lead": "An AI styling platform for the looks and characters you want to create.\n\n",
     "feedTitle": "Latest updates",
     "filters": {
       "newest": "Newest",

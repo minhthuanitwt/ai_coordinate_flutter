@@ -90,8 +90,8 @@ class _TranslationsHomeJa extends TranslationsHomeEn {
 	final TranslationsJa _root; // ignore: unused_field
 
 	// Translations
-	@override String get headline => '作成、連携、公開までを1か所で。';
-	@override String get lead => 'Next.js版を参考にしたモバイルファーストの公開ディスカバリー画面です。ライブバナー、投稿画像、共通ナビゲーションシェルを備えています。';
+	@override String get headline => 'Persta | ペルスタ\n';
+	@override String get lead => '着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n';
 	@override String get feed_title => '最新アップデート';
 	@override late final _TranslationsHomeFiltersJa filters = _TranslationsHomeFiltersJa._(_root);
 	@override String get banner_chip => '注目';
@@ -246,8 +246,8 @@ extension on TranslationsJa {
 			'nav.challenge' => 'チャレンジ',
 			'nav.notifications' => '通知',
 			'nav.my_page' => 'マイページ',
-			'home.headline' => '作成、連携、公開までを1か所で。',
-			'home.lead' => 'Next.js版を参考にしたモバイルファーストの公開ディスカバリー画面です。ライブバナー、投稿画像、共通ナビゲーションシェルを備えています。',
+			'home.headline' => 'Persta | ペルスタ\n',
+			'home.lead' => '着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n',
 			'home.feed_title' => '最新アップデート',
 			'home.filters.newest' => '新着順',
 			'home.filters.recommended' => 'おすすめ',
