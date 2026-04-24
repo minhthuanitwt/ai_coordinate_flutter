@@ -1,0 +1,84 @@
+{
+  "appName": "Persta.AI",
+  "loading": "読み込み中",
+  "defaultUserLabel": "creator",
+  "shell": {
+    "subtitle": "軽量な1つのアプリでAIワークフローを整理します。",
+    "headerTitle": "今日のPersta.AI",
+    "footerTagline": "参照元のNext.jsプロダクトをもとにしたPhase 1のFlutterシェルです。"
+  },
+  "nav": {
+    "home": "ホーム",
+    "coordinate": "コーディネート",
+    "challenge": "チャレンジ",
+    "notifications": "通知",
+    "myPage": "マイページ"
+  },
+  "home": {
+    "headline": "作成、連携、公開までを1か所で。",
+    "lead": "Next.js版を参考にしたモバイルファーストの公開ディスカバリー画面です。ライブバナー、投稿画像、共通ナビゲーションシェルを備えています。",
+    "feedTitle": "最新アップデート",
+    "filters": {
+      "newest": "新着順",
+      "recommended": "おすすめ",
+      "following": "フォロー中"
+    },
+    "bannerChip": "注目",
+    "bannerFallbackTitle": "最新のハイライトを開く",
+    "feedMissingPreview": "この投稿にはまだプロンプトやキャプションのプレビューがありません。",
+    "configTitle": "Supabaseの設定が必要です",
+    "configBody": "HomeはSupabaseからライブバナーと公開投稿を読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。",
+    "errorTitle": "Homeを読み込めませんでした",
+    "errorBody": "現在バナーまたは公開投稿を取得できません。しばらくしてから再試行してください。",
+    "emptyTitle": "表示できる内容がまだありません",
+    "emptyBody": "現在表示できるアクティブなバナーや投稿画像はありません。",
+    "linkUnavailable": "このリンク先はFlutterアプリ内ではまだ利用できません。",
+    "linkError": "選択したバナーリンクを開けませんでした。",
+    "postedAtLabel": "投稿日時",
+    "creatorLabel": "Creator",
+    "viewsLabel": "閲覧数",
+    "followingEmptyTitle": "フォロー中のクリエイターはいません",
+    "followingEmptyBody": "Following は現在一時的なローカルフィルターです。より多くのクリエイターとやり取りすると、このタブはより意味のある内容になります。"
+  },
+  "coordinate": {
+    "title": "コーディネート ワークスペース",
+    "description": "このエリアでは共同作業レーン、施策の追跡、共有実行ビューを扱う予定です。",
+    "badge": "プレビュー",
+    "boardTitle": "コーディネート出力",
+    "boardSubtitle": "Supabase上の最新のCoordinate生成結果を、オーナー向けボードでまとめて確認できます。",
+    "summaryTitle": "最新のCoordinateライブラリ",
+    "summaryCountPrefix": "読み込み済みアイテム数",
+    "postedBadge": "公開済み",
+    "draftBadge": "下書き",
+    "promptLabel": "Prompt",
+    "missingPrompt": "このアイテムには保存されたプロンプトがありません。",
+    "createdAtLabel": "作成日時",
+    "modelLabel": "モデル",
+    "sourceLabel": "ソース素材",
+    "emptyTitle": "Coordinateアイテムはまだありません",
+    "emptyBody": "最初のCoordinate出力をSupabaseに生成または同期してから、ここで管理してください。",
+    "errorTitle": "Coordinateアイテムを読み込めませんでした",
+    "errorBody": "現在ボードで最新アイテムを取得できません。しばらくしてから再試行してください。",
+    "configTitle": "Supabaseの設定が必要です",
+    "configBody": "このボードはSupabaseからライブデータを読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。"
+  },
+  "common": {
+    "retryButton": "再試行",
+    "loadMoreButton": "もっと見る"
+  },
+  "challenge": {
+    "title": "チャレンジボード",
+    "description": "このページはチャレンジ施策、応募、進捗チェックポイントのために用意されています。",
+    "badge": "メンバー限定"
+  },
+  "notifications": {
+    "title": "通知センター",
+    "description": "このセクションには、アラート、イベント更新、共同作業シグナルがモバイルファーストの1画面に集約されます。",
+    "badge": "リアルタイム対応"
+  },
+  "myPage": {
+    "title": "マイページ",
+    "description": "このプロフィールエリアでは、アカウント情報、クリエイター情報、アクティビティの概要を表示する予定です。",
+    "badge": "アカウント"
+  }
+}

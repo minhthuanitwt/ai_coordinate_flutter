@@ -6,7 +6,7 @@
 /// Locales: 2
 /// Strings: 128 (64 per locale)
 ///
-/// Built on 2026-04-24 at 08:23 UTC
+/// Built on 2026-04-24 at 08:28 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -18,7 +18,7 @@ import 'package:slang/generated.dart';
 import 'package:slang_flutter/slang_flutter.dart';
 export 'package:slang_flutter/slang_flutter.dart';
 
-import 'strings_vi.g.dart' deferred as l_vi;
+import 'strings_ja.g.dart' deferred as l_ja;
 part 'strings_en.g.dart';
 
 /// Supported locales.
@@ -29,7 +29,7 @@ part 'strings_en.g.dart';
 /// - if (LocaleSettings.currentLocale == AppLocale.en) // locale check
 enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 	en(languageCode: 'en'),
-	vi(languageCode: 'vi');
+	ja(languageCode: 'ja');
 
 	const AppLocale({
 		required this.languageCode,
@@ -54,9 +54,9 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,
 				);
-			case AppLocale.vi:
-				await l_vi.loadLibrary();
-				return l_vi.TranslationsVi(
+			case AppLocale.ja:
+				await l_ja.loadLibrary();
+				return l_ja.TranslationsJa(
 					overrides: overrides,
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,
@@ -77,8 +77,8 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,
 				);
-			case AppLocale.vi:
-				return l_vi.TranslationsVi(
+			case AppLocale.ja:
+				return l_ja.TranslationsJa(
 					overrides: overrides,
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,

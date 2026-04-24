@@ -259,7 +259,6 @@ class _CoordinatePageState extends ConsumerState<CoordinatePage> {
   }
 
   String _formatDateTime(BuildContext context, DateTime value) {
-    final locale = Localizations.localeOf(context).languageCode;
     final date =
         '${value.year.toString().padLeft(4, '0')}-'
         '${value.month.toString().padLeft(2, '0')}-'
@@ -267,7 +266,7 @@ class _CoordinatePageState extends ConsumerState<CoordinatePage> {
     final time =
         '${value.hour.toString().padLeft(2, '0')}:'
         '${value.minute.toString().padLeft(2, '0')}';
-    return locale == 'vi' ? '$time, $date' : '$date $time';
+    return '$date $time';
   }
 }
 

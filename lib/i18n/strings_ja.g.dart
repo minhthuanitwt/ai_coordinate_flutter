@@ -1,0 +1,273 @@
+///
+/// Generated file. Do not edit.
+///
+// coverage:ignore-file
+// ignore_for_file: type=lint, unused_import
+// dart format off
+
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:slang/generated.dart';
+import 'strings.g.dart';
+
+// Path: <root>
+class TranslationsJa extends Translations with BaseTranslations<AppLocale, Translations> {
+	/// You can call this constructor and build your own translation instance of this locale.
+	/// Constructing via the enum [AppLocale.build] is preferred.
+	TranslationsJa({Map<String, Node>? overrides, PluralResolver? cardinalResolver, PluralResolver? ordinalResolver, TranslationMetadata<AppLocale, Translations>? meta})
+		: assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
+		  $meta = meta ?? TranslationMetadata(
+		    locale: AppLocale.ja,
+		    overrides: overrides ?? {},
+		    cardinalResolver: cardinalResolver,
+		    ordinalResolver: ordinalResolver,
+		  ),
+		  super(cardinalResolver: cardinalResolver, ordinalResolver: ordinalResolver) {
+		super.$meta.setFlatMapFunction($meta.getTranslation); // copy base translations to super.$meta
+		$meta.setFlatMapFunction(_flatMapFunction);
+	}
+
+	/// Metadata for the translations of <ja>.
+	@override final TranslationMetadata<AppLocale, Translations> $meta;
+
+	/// Access flat map
+	@override dynamic operator[](String key) => $meta.getTranslation(key) ?? super.$meta.getTranslation(key);
+
+	late final TranslationsJa _root = this; // ignore: unused_field
+
+	@override 
+	TranslationsJa $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsJa(meta: meta ?? this.$meta);
+
+	// Translations
+	@override String get app_name => 'Persta.AI';
+	@override String get loading => '読み込み中';
+	@override String get default_user_label => 'creator';
+	@override late final _TranslationsShellJa shell = _TranslationsShellJa._(_root);
+	@override late final _TranslationsNavJa nav = _TranslationsNavJa._(_root);
+	@override late final _TranslationsHomeJa home = _TranslationsHomeJa._(_root);
+	@override late final _TranslationsCoordinateJa coordinate = _TranslationsCoordinateJa._(_root);
+	@override late final _TranslationsCommonJa common = _TranslationsCommonJa._(_root);
+	@override late final _TranslationsChallengeJa challenge = _TranslationsChallengeJa._(_root);
+	@override late final _TranslationsNotificationsJa notifications = _TranslationsNotificationsJa._(_root);
+	@override late final _TranslationsMyPageJa my_page = _TranslationsMyPageJa._(_root);
+}
+
+// Path: shell
+class _TranslationsShellJa extends TranslationsShellEn {
+	_TranslationsShellJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get subtitle => '軽量な1つのアプリでAIワークフローを整理します。';
+	@override String get header_title => '今日のPersta.AI';
+	@override String get footer_tagline => '参照元のNext.jsプロダクトをもとにしたPhase 1のFlutterシェルです。';
+}
+
+// Path: nav
+class _TranslationsNavJa extends TranslationsNavEn {
+	_TranslationsNavJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get home => 'ホーム';
+	@override String get coordinate => 'コーディネート';
+	@override String get challenge => 'チャレンジ';
+	@override String get notifications => '通知';
+	@override String get my_page => 'マイページ';
+}
+
+// Path: home
+class _TranslationsHomeJa extends TranslationsHomeEn {
+	_TranslationsHomeJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get headline => '作成、連携、公開までを1か所で。';
+	@override String get lead => 'Next.js版を参考にしたモバイルファーストの公開ディスカバリー画面です。ライブバナー、投稿画像、共通ナビゲーションシェルを備えています。';
+	@override String get feed_title => '最新アップデート';
+	@override late final _TranslationsHomeFiltersJa filters = _TranslationsHomeFiltersJa._(_root);
+	@override String get banner_chip => '注目';
+	@override String get banner_fallback_title => '最新のハイライトを開く';
+	@override String get feed_missing_preview => 'この投稿にはまだプロンプトやキャプションのプレビューがありません。';
+	@override String get config_title => 'Supabaseの設定が必要です';
+	@override String get config_body => 'HomeはSupabaseからライブバナーと公開投稿を読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。';
+	@override String get error_title => 'Homeを読み込めませんでした';
+	@override String get error_body => '現在バナーまたは公開投稿を取得できません。しばらくしてから再試行してください。';
+	@override String get empty_title => '表示できる内容がまだありません';
+	@override String get empty_body => '現在表示できるアクティブなバナーや投稿画像はありません。';
+	@override String get link_unavailable => 'このリンク先はFlutterアプリ内ではまだ利用できません。';
+	@override String get link_error => '選択したバナーリンクを開けませんでした。';
+	@override String get posted_at_label => '投稿日時';
+	@override String get creator_label => 'Creator';
+	@override String get views_label => '閲覧数';
+	@override String get following_empty_title => 'フォロー中のクリエイターはいません';
+	@override String get following_empty_body => 'Following は現在一時的なローカルフィルターです。より多くのクリエイターとやり取りすると、このタブはより意味のある内容になります。';
+}
+
+// Path: coordinate
+class _TranslationsCoordinateJa extends TranslationsCoordinateEn {
+	_TranslationsCoordinateJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'コーディネート ワークスペース';
+	@override String get description => 'このエリアでは共同作業レーン、施策の追跡、共有実行ビューを扱う予定です。';
+	@override String get badge => 'プレビュー';
+	@override String get board_title => 'コーディネート出力';
+	@override String get board_subtitle => 'Supabase上の最新のCoordinate生成結果を、オーナー向けボードでまとめて確認できます。';
+	@override String get summary_title => '最新のCoordinateライブラリ';
+	@override String get summary_count_prefix => '読み込み済みアイテム数';
+	@override String get posted_badge => '公開済み';
+	@override String get draft_badge => '下書き';
+	@override String get prompt_label => 'Prompt';
+	@override String get missing_prompt => 'このアイテムには保存されたプロンプトがありません。';
+	@override String get created_at_label => '作成日時';
+	@override String get model_label => 'モデル';
+	@override String get source_label => 'ソース素材';
+	@override String get empty_title => 'Coordinateアイテムはまだありません';
+	@override String get empty_body => '最初のCoordinate出力をSupabaseに生成または同期してから、ここで管理してください。';
+	@override String get error_title => 'Coordinateアイテムを読み込めませんでした';
+	@override String get error_body => '現在ボードで最新アイテムを取得できません。しばらくしてから再試行してください。';
+	@override String get config_title => 'Supabaseの設定が必要です';
+	@override String get config_body => 'このボードはSupabaseからライブデータを読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。';
+}
+
+// Path: common
+class _TranslationsCommonJa extends TranslationsCommonEn {
+	_TranslationsCommonJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get retry_button => '再試行';
+	@override String get load_more_button => 'もっと見る';
+}
+
+// Path: challenge
+class _TranslationsChallengeJa extends TranslationsChallengeEn {
+	_TranslationsChallengeJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'チャレンジボード';
+	@override String get description => 'このページはチャレンジ施策、応募、進捗チェックポイントのために用意されています。';
+	@override String get badge => 'メンバー限定';
+}
+
+// Path: notifications
+class _TranslationsNotificationsJa extends TranslationsNotificationsEn {
+	_TranslationsNotificationsJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => '通知センター';
+	@override String get description => 'このセクションには、アラート、イベント更新、共同作業シグナルがモバイルファーストの1画面に集約されます。';
+	@override String get badge => 'リアルタイム対応';
+}
+
+// Path: my_page
+class _TranslationsMyPageJa extends TranslationsMyPageEn {
+	_TranslationsMyPageJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'マイページ';
+	@override String get description => 'このプロフィールエリアでは、アカウント情報、クリエイター情報、アクティビティの概要を表示する予定です。';
+	@override String get badge => 'アカウント';
+}
+
+// Path: home.filters
+class _TranslationsHomeFiltersJa extends TranslationsHomeFiltersEn {
+	_TranslationsHomeFiltersJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get newest => '新着順';
+	@override String get recommended => 'おすすめ';
+	@override String get following => 'フォロー中';
+}
+
+/// The flat map containing all translations for locale <ja>.
+/// Only for edge cases! For simple maps, use the map function of this library.
+///
+/// The Dart AOT compiler has issues with very large switch statements,
+/// so the map is split into smaller functions (512 entries each).
+extension on TranslationsJa {
+	dynamic _flatMapFunction(String path) {
+		return switch (path) {
+			'app_name' => 'Persta.AI',
+			'loading' => '読み込み中',
+			'default_user_label' => 'creator',
+			'shell.subtitle' => '軽量な1つのアプリでAIワークフローを整理します。',
+			'shell.header_title' => '今日のPersta.AI',
+			'shell.footer_tagline' => '参照元のNext.jsプロダクトをもとにしたPhase 1のFlutterシェルです。',
+			'nav.home' => 'ホーム',
+			'nav.coordinate' => 'コーディネート',
+			'nav.challenge' => 'チャレンジ',
+			'nav.notifications' => '通知',
+			'nav.my_page' => 'マイページ',
+			'home.headline' => '作成、連携、公開までを1か所で。',
+			'home.lead' => 'Next.js版を参考にしたモバイルファーストの公開ディスカバリー画面です。ライブバナー、投稿画像、共通ナビゲーションシェルを備えています。',
+			'home.feed_title' => '最新アップデート',
+			'home.filters.newest' => '新着順',
+			'home.filters.recommended' => 'おすすめ',
+			'home.filters.following' => 'フォロー中',
+			'home.banner_chip' => '注目',
+			'home.banner_fallback_title' => '最新のハイライトを開く',
+			'home.feed_missing_preview' => 'この投稿にはまだプロンプトやキャプションのプレビューがありません。',
+			'home.config_title' => 'Supabaseの設定が必要です',
+			'home.config_body' => 'HomeはSupabaseからライブバナーと公開投稿を読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。',
+			'home.error_title' => 'Homeを読み込めませんでした',
+			'home.error_body' => '現在バナーまたは公開投稿を取得できません。しばらくしてから再試行してください。',
+			'home.empty_title' => '表示できる内容がまだありません',
+			'home.empty_body' => '現在表示できるアクティブなバナーや投稿画像はありません。',
+			'home.link_unavailable' => 'このリンク先はFlutterアプリ内ではまだ利用できません。',
+			'home.link_error' => '選択したバナーリンクを開けませんでした。',
+			'home.posted_at_label' => '投稿日時',
+			'home.creator_label' => 'Creator',
+			'home.views_label' => '閲覧数',
+			'home.following_empty_title' => 'フォロー中のクリエイターはいません',
+			'home.following_empty_body' => 'Following は現在一時的なローカルフィルターです。より多くのクリエイターとやり取りすると、このタブはより意味のある内容になります。',
+			'coordinate.title' => 'コーディネート ワークスペース',
+			'coordinate.description' => 'このエリアでは共同作業レーン、施策の追跡、共有実行ビューを扱う予定です。',
+			'coordinate.badge' => 'プレビュー',
+			'coordinate.board_title' => 'コーディネート出力',
+			'coordinate.board_subtitle' => 'Supabase上の最新のCoordinate生成結果を、オーナー向けボードでまとめて確認できます。',
+			'coordinate.summary_title' => '最新のCoordinateライブラリ',
+			'coordinate.summary_count_prefix' => '読み込み済みアイテム数',
+			'coordinate.posted_badge' => '公開済み',
+			'coordinate.draft_badge' => '下書き',
+			'coordinate.prompt_label' => 'Prompt',
+			'coordinate.missing_prompt' => 'このアイテムには保存されたプロンプトがありません。',
+			'coordinate.created_at_label' => '作成日時',
+			'coordinate.model_label' => 'モデル',
+			'coordinate.source_label' => 'ソース素材',
+			'coordinate.empty_title' => 'Coordinateアイテムはまだありません',
+			'coordinate.empty_body' => '最初のCoordinate出力をSupabaseに生成または同期してから、ここで管理してください。',
+			'coordinate.error_title' => 'Coordinateアイテムを読み込めませんでした',
+			'coordinate.error_body' => '現在ボードで最新アイテムを取得できません。しばらくしてから再試行してください。',
+			'coordinate.config_title' => 'Supabaseの設定が必要です',
+			'coordinate.config_body' => 'このボードはSupabaseからライブデータを読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。',
+			'common.retry_button' => '再試行',
+			'common.load_more_button' => 'もっと見る',
+			'challenge.title' => 'チャレンジボード',
+			'challenge.description' => 'このページはチャレンジ施策、応募、進捗チェックポイントのために用意されています。',
+			'challenge.badge' => 'メンバー限定',
+			'notifications.title' => '通知センター',
+			'notifications.description' => 'このセクションには、アラート、イベント更新、共同作業シグナルがモバイルファーストの1画面に集約されます。',
+			'notifications.badge' => 'リアルタイム対応',
+			'my_page.title' => 'マイページ',
+			'my_page.description' => 'このプロフィールエリアでは、アカウント情報、クリエイター情報、アクティビティの概要を表示する予定です。',
+			'my_page.badge' => 'アカウント',
+			_ => null,
+		};
+	}
+}
