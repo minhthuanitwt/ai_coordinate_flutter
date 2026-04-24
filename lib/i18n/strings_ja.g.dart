@@ -92,6 +92,7 @@ class _TranslationsHomeJa extends TranslationsHomeEn {
 	// Translations
 	@override String get headline => 'Persta | ペルスタ\n';
 	@override String get lead => '着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n';
+	@override late final _TranslationsHomeAppbarJa appbar = _TranslationsHomeAppbarJa._(_root);
 	@override String get feed_title => '最新アップデート';
 	@override late final _TranslationsHomeFiltersJa filters = _TranslationsHomeFiltersJa._(_root);
 	@override String get banner_chip => '注目';
@@ -208,6 +209,8 @@ class _TranslationsMyPageJa extends TranslationsMyPageEn {
 	// Translations
 	@override String get title => 'マイページ';
 	@override String get description => 'プロフィール、統計、残高、生成ギャラリーを1つの画面で確認できます。';
+	@override late final _TranslationsMyPageAppbarJa appbar = _TranslationsMyPageAppbarJa._(_root);
+	@override late final _TranslationsMyPageDrawerJa drawer = _TranslationsMyPageDrawerJa._(_root);
 	@override String get badge => 'アカウント';
 	@override String get default_display_name => 'Creator';
 	@override String get default_bio => 'プロフィールの自己紹介はまだありません。';
@@ -242,6 +245,18 @@ class _TranslationsMyPageJa extends TranslationsMyPageEn {
 	@override String get gallery_error_body => '現在ギャラリー情報を取得できません。';
 }
 
+// Path: home.appbar
+class _TranslationsHomeAppbarJa extends TranslationsHomeAppbarEn {
+	_TranslationsHomeAppbarJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get search_placeholder => 'プロンプトを検索';
+	@override String get locale_action => '言語を変更';
+	@override String get profile_action => 'プロフィールを開く';
+}
+
 // Path: home.filters
 class _TranslationsHomeFiltersJa extends TranslationsHomeFiltersEn {
 	_TranslationsHomeFiltersJa._(TranslationsJa root) : this._root = root, super.internal(root);
@@ -252,6 +267,32 @@ class _TranslationsHomeFiltersJa extends TranslationsHomeFiltersEn {
 	@override String get newest => '新着順';
 	@override String get recommended => 'おすすめ';
 	@override String get following => 'フォロー中';
+}
+
+// Path: my_page.appbar
+class _TranslationsMyPageAppbarJa extends TranslationsMyPageAppbarEn {
+	_TranslationsMyPageAppbarJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get menu_action => 'メニューを開く';
+}
+
+// Path: my_page.drawer
+class _TranslationsMyPageDrawerJa extends TranslationsMyPageDrawerEn {
+	_TranslationsMyPageDrawerJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'メニュー';
+	@override String get account_action => 'アカウント';
+	@override String get language_settings_action => '言語設定';
+	@override String get contact_action => 'お問い合わせ';
+	@override String get buy_percoins_action => 'Percoinsを購入';
+	@override String get logout_action => 'ログアウト';
+	@override String get close_action => 'メニューを閉じる';
 }
 
 /// The flat map containing all translations for locale <ja>.
@@ -279,6 +320,9 @@ extension on TranslationsJa {
 			'nav.my_page' => 'マイページ',
 			'home.headline' => 'Persta | ペルスタ\n',
 			'home.lead' => '着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n',
+			'home.appbar.search_placeholder' => 'プロンプトを検索',
+			'home.appbar.locale_action' => '言語を変更',
+			'home.appbar.profile_action' => 'プロフィールを開く',
 			'home.feed_title' => '最新アップデート',
 			'home.filters.newest' => '新着順',
 			'home.filters.recommended' => 'おすすめ',
@@ -343,6 +387,14 @@ extension on TranslationsJa {
 			'notifications.badge' => 'リアルタイム対応',
 			'my_page.title' => 'マイページ',
 			'my_page.description' => 'プロフィール、統計、残高、生成ギャラリーを1つの画面で確認できます。',
+			'my_page.appbar.menu_action' => 'メニューを開く',
+			'my_page.drawer.title' => 'メニュー',
+			'my_page.drawer.account_action' => 'アカウント',
+			'my_page.drawer.language_settings_action' => '言語設定',
+			'my_page.drawer.contact_action' => 'お問い合わせ',
+			'my_page.drawer.buy_percoins_action' => 'Percoinsを購入',
+			'my_page.drawer.logout_action' => 'ログアウト',
+			'my_page.drawer.close_action' => 'メニューを閉じる',
 			'my_page.badge' => 'アカウント',
 			'my_page.default_display_name' => 'Creator',
 			'my_page.default_bio' => 'プロフィールの自己紹介はまだありません。',

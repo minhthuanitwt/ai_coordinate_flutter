@@ -27,7 +27,6 @@ class AppShellPage extends ConsumerWidget {
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
-        final showTopAuthHeader = tabsRouter.activeIndex == 4;
         final items = [
           _ShellItem(
             label: t.nav.home,
@@ -74,20 +73,7 @@ class AppShellPage extends ConsumerWidget {
 
         return Scaffold(
           backgroundColor: AppColors.background,
-          body: SafeArea(
-            child: Column(
-              children: [
-                if (showTopAuthHeader) ...[
-                  const _ShellHeader(),
-                  _SessionBanner(
-                    isAuthenticated: isAuthenticated,
-                    email: authSession?.email,
-                  ),
-                ],
-                Expanded(child: child),
-              ],
-            ),
-          ),
+          body: SafeArea(child: child),
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
               labelTextStyle: WidgetStatePropertyAll(
@@ -123,87 +109,6 @@ class AppShellPage extends ConsumerWidget {
       4 => ProtectedDestination.myPage,
       _ => null,
     };
-  }
-}
-
-class _ShellHeader extends ConsumerWidget {
-  const _ShellHeader();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final t = context.t;
-    final authSession = ref.watch(authSessionProvider).valueOrNull;
-    final isAuthenticated = authSession?.isAuthenticated ?? false;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
-      decoration: const BoxDecoration(
-        color: AppColors.background,
-        border: Border(bottom: BorderSide(color: AppColors.border)),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  t.shell.subtitle,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          if (isAuthenticated)
-            OutlinedButton.icon(
-              onPressed: () async {
-                await ref.read(authRepositoryProvider).signOut();
-                ref.read(authRedirectTargetProvider.notifier).state = null;
-              },
-              icon: const Icon(Icons.logout_outlined),
-              label: Text(t.shell.logout_cta),
-            )
-          else
-            FilledButton.icon(
-              onPressed: () {
-                context.router.root.push(const LoginRoute());
-              },
-              icon: const Icon(Icons.login),
-              label: Text(t.shell.login_cta),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SessionBanner extends StatelessWidget {
-  const _SessionBanner({required this.isAuthenticated, required this.email});
-
-  final bool isAuthenticated;
-  final String? email;
-
-  @override
-  Widget build(BuildContext context) {
-    final t = context.t;
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(bottom: BorderSide(color: AppColors.border)),
-      ),
-      child: Text(
-        isAuthenticated
-            ? '${t.shell.member_badge}: ${email ?? ''}'
-            : t.shell.guest_badge,
-        style: Theme.of(
-          context,
-        ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-      ),
-    );
   }
 }
 

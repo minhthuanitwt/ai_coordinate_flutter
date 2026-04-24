@@ -7,6 +7,7 @@ import '../../../domain/models/my_page_image_item.dart';
 import '../../../domain/models/my_page_profile.dart';
 import '../../../domain/models/my_page_stats.dart';
 import '../../../i18n/strings.g.dart';
+import '../../../presentation/providers/auth_session_provider.dart';
 import '../../../themes/app_colors.dart';
 import 'my_page_view_model.dart';
 
@@ -19,6 +20,8 @@ class MyPagePage extends ConsumerStatefulWidget {
 }
 
 class _MyPagePageState extends ConsumerState<MyPagePage> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -31,271 +34,284 @@ class _MyPagePageState extends ConsumerState<MyPagePage> {
   Widget build(BuildContext context) {
     final t = context.t;
     final state = ref.watch(myPageViewModelProvider);
+    final isAuthenticated = ref.watch(isAuthenticatedProvider);
 
-    return RefreshIndicator(
-      onRefresh: ref.read(myPageViewModelProvider.notifier).refresh,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (notification) {
-          if (notification.metrics.pixels >=
-              notification.metrics.maxScrollExtent - 280) {
-            ref.read(myPageViewModelProvider.notifier).loadMoreImages();
-          }
-          return false;
-        },
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(t.my_page.title, style: Theme.of(context).textTheme.displaySmall),
-                    const SizedBox(height: 10),
-                    Text(
-                      t.my_page.description,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodyLarge?.copyWith(color: AppColors.textMuted),
-                    ),
-                  ],
-                ),
-              ),
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text(t.my_page.title),
+        actions: [
+          if (isAuthenticated)
+            IconButton(
+              tooltip: t.my_page.appbar.menu_action,
+              onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
+              icon: const Icon(Icons.menu),
             ),
-            if (state.errorCode != null && !state.hasAnyData)
-              SliverFillRemaining(
-                hasScrollBody: false,
-                child: _MyPageBlockingErrorView(
-                  onRetry: () => ref.read(myPageViewModelProvider.notifier).loadInitial(),
-                ),
-              )
-            else ...[
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                  child: _ProfileSection(
-                    profile: state.profile,
-                    isLoading: state.isLoadingInitial && state.profile == null,
-                    errorCode: state.profileErrorCode,
-                    onRetry: () =>
-                        ref.read(myPageViewModelProvider.notifier).loadInitial(),
-                  ),
+        ],
+      ),
+      endDrawer: Drawer(
+        child: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Text(
+                  t.my_page.drawer.title,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
+              const Divider(height: 1),
+              const SizedBox(height: 8),
+              ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: Text(t.my_page.drawer.account_action),
+                onTap: () {
+                  Navigator.of(context).maybePop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.language),
+                title: Text(t.my_page.drawer.language_settings_action),
+                onTap: () {
+                  Navigator.of(context).maybePop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.support_agent_outlined),
+                title: Text(t.my_page.drawer.contact_action),
+                onTap: () {
+                  Navigator.of(context).maybePop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.add_circle_outline),
+                title: Text(t.my_page.drawer.buy_percoins_action),
+                onTap: () {
+                  Navigator.of(context).maybePop();
+                },
+              ),
+              if (isAuthenticated)
+                ListTile(
+                  leading: const Icon(Icons.logout_outlined),
+                  title: Text(t.my_page.drawer.logout_action),
+                  onTap: () async {
+                    Navigator.of(context).maybePop();
+                    await _onTapLogout();
+                  },
+                ),
+            ],
+          ),
+        ),
+      ),
+      body: RefreshIndicator(
+        onRefresh: ref.read(myPageViewModelProvider.notifier).refresh,
+        child: NotificationListener<ScrollNotification>(
+          onNotification: (notification) {
+            if (notification.metrics.pixels >=
+                notification.metrics.maxScrollExtent - 280) {
+              ref.read(myPageViewModelProvider.notifier).loadMoreImages();
+            }
+            return false;
+          },
+          child: CustomScrollView(
+            slivers: [
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                  child: _StatsSection(
-                    stats: state.stats,
-                    isLoading: state.isLoadingInitial && state.stats == null,
-                    errorCode: state.statsErrorCode,
-                    onRetry: () =>
-                        ref.read(myPageViewModelProvider.notifier).loadInitial(),
-                  ),
+                child: _MyPageTopHeader(
+                  profile: state.profile,
+                  isLoading: state.isLoadingInitial && state.profile == null,
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-                  child: _BalanceSection(
-                    balance: state.balance,
-                    isLoading: state.isLoadingInitial && state.balance == null,
-                    errorCode: state.balanceErrorCode,
-                    onRetry: () =>
-                        ref.read(myPageViewModelProvider.notifier).loadInitial(),
+              if (state.errorCode != null && !state.hasAnyData)
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: _MyPageBlockingErrorView(
+                    onRetry: () => ref
+                        .read(myPageViewModelProvider.notifier)
+                        .loadInitial(),
                   ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-                  child: Text(
-                    t.my_page.gallery_title,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-              ),
-              if (state.isLoadingInitial && state.images.isEmpty)
-                const SliverPadding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 28),
-                  sliver: _ImageLoadingSliver(),
                 )
-              else if (state.imagesErrorCode != null && state.images.isEmpty)
+              else ...[
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    child: _SectionErrorCard(
-                      title: t.my_page.gallery_error_title,
-                      body: t.my_page.gallery_error_body,
-                      onRetry: () =>
-                          ref.read(myPageViewModelProvider.notifier).loadInitial(),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    child: _StatsSection(
+                      stats: state.stats,
+                      isLoading: state.isLoadingInitial && state.stats == null,
+                      errorCode: state.statsErrorCode,
+                      onRetry: () => ref
+                          .read(myPageViewModelProvider.notifier)
+                          .loadInitial(),
                     ),
                   ),
-                )
-              else if (state.isGalleryEmpty)
+                ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
-                    child: _SectionEmptyCard(
-                      title: t.my_page.gallery_empty_title,
-                      body: t.my_page.gallery_empty_body,
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
+                    child: _BalanceSection(
+                      balance: state.balance,
+                      isLoading:
+                          state.isLoadingInitial && state.balance == null,
+                      errorCode: state.balanceErrorCode,
+                      onRetry: () => ref
+                          .read(myPageViewModelProvider.notifier)
+                          .loadInitial(),
                     ),
                   ),
-                )
-              else
-                SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  sliver: SliverLayoutBuilder(
-                    builder: (context, constraints) {
-                      final width = constraints.crossAxisExtent;
-                      final columns = width >= 1100
-                          ? 3
-                          : width >= 700
-                          ? 2
-                          : 1;
-                      return SliverGrid.builder(
-                        itemCount: state.images.length,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: columns,
-                          crossAxisSpacing: 14,
-                          mainAxisSpacing: 14,
-                          mainAxisExtent: columns == 1 ? 378 : 332,
-                        ),
-                        itemBuilder: (context, index) {
-                          return _MyImageCard(item: state.images[index]);
-                        },
-                      );
-                    },
-                  ),
                 ),
-              if (state.images.isNotEmpty && state.isLoadingMoreImages)
-                const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 28),
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
-                )
-              else if (state.images.isNotEmpty && state.hasMoreImages)
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
-                    child: Center(
-                      child: OutlinedButton(
-                        onPressed: () => ref
+                    padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+                    child: Text(
+                      t.my_page.gallery_title,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                ),
+                if (state.isLoadingInitial && state.images.isEmpty)
+                  const SliverPadding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 28),
+                    sliver: _ImageLoadingSliver(),
+                  )
+                else if (state.imagesErrorCode != null && state.images.isEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      child: _SectionErrorCard(
+                        title: t.my_page.gallery_error_title,
+                        body: t.my_page.gallery_error_body,
+                        onRetry: () => ref
                             .read(myPageViewModelProvider.notifier)
-                            .loadMoreImages(),
-                        child: Text(t.common.load_more_button),
+                            .loadInitial(),
+                      ),
+                    ),
+                  )
+                else if (state.isGalleryEmpty)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+                      child: _SectionEmptyCard(
+                        title: t.my_page.gallery_empty_title,
+                        body: t.my_page.gallery_empty_body,
+                      ),
+                    ),
+                  )
+                else
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                    sliver: SliverLayoutBuilder(
+                      builder: (context, constraints) {
+                        final width = constraints.crossAxisExtent;
+                        final columns = width >= 1100
+                            ? 3
+                            : width >= 700
+                            ? 2
+                            : 1;
+                        return SliverGrid.builder(
+                          itemCount: state.images.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: columns,
+                                crossAxisSpacing: 14,
+                                mainAxisSpacing: 14,
+                                mainAxisExtent: columns == 1 ? 378 : 332,
+                              ),
+                          itemBuilder: (context, index) {
+                            return _MyImageCard(item: state.images[index]);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                if (state.images.isNotEmpty && state.isLoadingMoreImages)
+                  const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 28),
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                  )
+                else if (state.images.isNotEmpty && state.hasMoreImages)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
+                      child: Center(
+                        child: OutlinedButton(
+                          onPressed: () => ref
+                              .read(myPageViewModelProvider.notifier)
+                              .loadMoreImages(),
+                          child: Text(t.common.load_more_button),
+                        ),
                       ),
                     ),
                   ),
-                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
   }
+
+  Future<void> _onTapLogout() async {
+    await ref.read(authRepositoryProvider).signOut();
+    if (!mounted) {
+      return;
+    }
+    ref.read(authRedirectTargetProvider.notifier).state = null;
+    context.tabsRouter.setActiveIndex(0);
+  }
 }
 
-class _ProfileSection extends StatelessWidget {
-  const _ProfileSection({
-    required this.profile,
-    required this.isLoading,
-    required this.errorCode,
-    required this.onRetry,
-  });
+class _MyPageTopHeader extends StatelessWidget {
+  const _MyPageTopHeader({required this.profile, required this.isLoading});
 
   final MyPageProfile? profile;
   final bool isLoading;
-  final String? errorCode;
-  final VoidCallback onRetry;
 
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    if (isLoading) {
-      return const _LoadingCard(height: 156);
-    }
-    if (profile == null) {
-      return _SectionErrorCard(
-        title: t.my_page.profile_error_title,
-        body: t.my_page.profile_error_body,
-        onRetry: onRetry,
-      );
-    }
-    if (errorCode != null) {
-      return _SectionErrorCard(
-        title: t.my_page.profile_partial_error_title,
-        body: t.my_page.profile_partial_error_body,
-        onRetry: onRetry,
-      );
-    }
-
-    final displayName = profile!.displayName.isEmpty
-        ? t.my_page.default_display_name
-        : profile!.displayName;
-    final bio = profile!.bio?.trim();
-    final avatarUrl = profile!.avatarUrl?.trim();
+    final displayName = profile?.displayName.trim();
+    final effectiveDisplayName = (displayName != null && displayName.isNotEmpty)
+        ? displayName
+        : t.my_page.default_display_name;
+    final avatarUrl = profile?.avatarUrl?.trim();
     final hasAvatar = avatarUrl != null && avatarUrl.isNotEmpty;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundColor: AppColors.softBlue,
-              backgroundImage: hasAvatar ? NetworkImage(avatarUrl) : null,
-              child: hasAvatar
-                  ? null
-                  : const Icon(Icons.person_outline, color: AppColors.primary),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(displayName, style: Theme.of(context).textTheme.titleLarge),
-                  const SizedBox(height: 6),
-                  Text(
-                    (bio != null && bio.isNotEmpty)
-                        ? bio
-                        : t.my_page.default_bio,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.softGreen,
-                      borderRadius: BorderRadius.circular(999),
-                    ),
-                    child: Text(
-                      t.my_page.badge,
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        color: AppColors.success,
-                        fontWeight: FontWeight.w700,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isCompact = constraints.maxWidth <= 360;
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CircleAvatar(
+                radius: isCompact ? 42 : 48,
+                backgroundColor: AppColors.softBlue,
+                backgroundImage: hasAvatar ? NetworkImage(avatarUrl) : null,
+                child: hasAvatar
+                    ? null
+                    : Icon(
+                        Icons.person_outline,
+                        color: AppColors.primary,
+                        size: isCompact ? 36 : 44,
                       ),
-                    ),
-                  ),
-                ],
               ),
-            ),
-          ],
-        ),
-      ),
+              const SizedBox(height: 14),
+              Text(
+                isLoading ? t.loading : effectiveDisplayName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                  fontSize: isCompact ? 30 : 36,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -462,10 +478,7 @@ class _BalanceSection extends StatelessWidget {
                   label: t.my_page.balance_regular,
                   value: '${data.regular}',
                 ),
-                _StatChip(
-                  label: t.my_page.balance_paid,
-                  value: '${data.paid}',
-                ),
+                _StatChip(label: t.my_page.balance_paid, value: '${data.paid}'),
                 _StatChip(
                   label: t.my_page.balance_unlimited_bonus,
                   value: '${data.unlimitedBonus}',
@@ -509,16 +522,17 @@ class _MyImageCard extends StatelessWidget {
                 child: Image.network(
                   item.imageUrl,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const ColoredBox(
-                    color: AppColors.softBlue,
-                    child: Center(
-                      child: Icon(
-                        Icons.image_not_supported_outlined,
-                        color: AppColors.primary,
-                        size: 30,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const ColoredBox(
+                        color: AppColors.softBlue,
+                        child: Center(
+                          child: Icon(
+                            Icons.image_not_supported_outlined,
+                            color: AppColors.primary,
+                            size: 30,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
                 ),
               ),
             ),

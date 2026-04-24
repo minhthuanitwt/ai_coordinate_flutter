@@ -129,6 +129,8 @@ class TranslationsHomeEn {
 	/// en: 'An AI styling platform for the looks and characters you want to create. '
 	String get lead => 'An AI styling platform for the looks and characters you want to create.\n\n';
 
+	late final TranslationsHomeAppbarEn appbar = TranslationsHomeAppbarEn.internal(_root);
+
 	/// en: 'Latest updates'
 	String get feed_title => 'Latest updates';
 
@@ -368,6 +370,9 @@ class TranslationsMyPageEn {
 	/// en: 'Your profile, statistics, balance, and generated gallery in one place.'
 	String get description => 'Your profile, statistics, balance, and generated gallery in one place.';
 
+	late final TranslationsMyPageAppbarEn appbar = TranslationsMyPageAppbarEn.internal(_root);
+	late final TranslationsMyPageDrawerEn drawer = TranslationsMyPageDrawerEn.internal(_root);
+
 	/// en: 'Account space'
 	String get badge => 'Account space';
 
@@ -465,6 +470,24 @@ class TranslationsMyPageEn {
 	String get gallery_error_body => 'Your image gallery is unavailable right now.';
 }
 
+// Path: home.appbar
+class TranslationsHomeAppbarEn {
+	TranslationsHomeAppbarEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Search prompts'
+	String get search_placeholder => 'Search prompts';
+
+	/// en: 'Change language'
+	String get locale_action => 'Change language';
+
+	/// en: 'Open profile'
+	String get profile_action => 'Open profile';
+}
+
 // Path: home.filters
 class TranslationsHomeFiltersEn {
 	TranslationsHomeFiltersEn.internal(this._root);
@@ -481,6 +504,48 @@ class TranslationsHomeFiltersEn {
 
 	/// en: 'Following'
 	String get following => 'Following';
+}
+
+// Path: my_page.appbar
+class TranslationsMyPageAppbarEn {
+	TranslationsMyPageAppbarEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Open menu'
+	String get menu_action => 'Open menu';
+}
+
+// Path: my_page.drawer
+class TranslationsMyPageDrawerEn {
+	TranslationsMyPageDrawerEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Menu'
+	String get title => 'Menu';
+
+	/// en: 'Account'
+	String get account_action => 'Account';
+
+	/// en: 'Language settings'
+	String get language_settings_action => 'Language settings';
+
+	/// en: 'Contact'
+	String get contact_action => 'Contact';
+
+	/// en: 'Buy Percoins'
+	String get buy_percoins_action => 'Buy Percoins';
+
+	/// en: 'Log out'
+	String get logout_action => 'Log out';
+
+	/// en: 'Close menu'
+	String get close_action => 'Close menu';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -508,6 +573,9 @@ extension on Translations {
 			'nav.my_page' => 'My Page',
 			'home.headline' => 'Persta',
 			'home.lead' => 'An AI styling platform for the looks and characters you want to create.\n\n',
+			'home.appbar.search_placeholder' => 'Search prompts',
+			'home.appbar.locale_action' => 'Change language',
+			'home.appbar.profile_action' => 'Open profile',
 			'home.feed_title' => 'Latest updates',
 			'home.filters.newest' => 'Newest',
 			'home.filters.recommended' => 'Recommended',
@@ -572,6 +640,14 @@ extension on Translations {
 			'notifications.badge' => 'Realtime ready',
 			'my_page.title' => 'My page',
 			'my_page.description' => 'Your profile, statistics, balance, and generated gallery in one place.',
+			'my_page.appbar.menu_action' => 'Open menu',
+			'my_page.drawer.title' => 'Menu',
+			'my_page.drawer.account_action' => 'Account',
+			'my_page.drawer.language_settings_action' => 'Language settings',
+			'my_page.drawer.contact_action' => 'Contact',
+			'my_page.drawer.buy_percoins_action' => 'Buy Percoins',
+			'my_page.drawer.logout_action' => 'Log out',
+			'my_page.drawer.close_action' => 'Close menu',
 			'my_page.badge' => 'Account space',
 			'my_page.default_display_name' => 'Creator',
 			'my_page.default_bio' => 'No profile bio yet.',

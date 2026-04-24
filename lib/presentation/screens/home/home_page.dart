@@ -21,6 +21,7 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   final _pageController = PageController(viewportFraction: 0.92);
+  final _searchController = SearchController();
   var _activeBannerIndex = 0;
 
   @override
@@ -34,6 +35,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   @override
   void dispose() {
     _pageController.dispose();
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -59,6 +61,17 @@ class _HomePageState extends ConsumerState<HomePage> {
         },
         child: CustomScrollView(
           slivers: [
+            SliverAppBar(
+              pinned: true,
+              automaticallyImplyLeading: false,
+              backgroundColor: AppColors.surface,
+              surfaceTintColor: Colors.transparent,
+              elevation: 0,
+              scrolledUnderElevation: 0,
+              toolbarHeight: 62,
+              titleSpacing: 12,
+              title: _HomeTopAppbar(controller: _searchController),
+            ),
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
@@ -379,6 +392,78 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 }
 
+class _HomeTopAppbar extends StatelessWidget {
+  const _HomeTopAppbar({required this.controller});
+
+  final SearchController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.t;
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+          decoration: const BoxDecoration(
+            color: AppColors.surface,
+            border: Border(bottom: BorderSide(color: AppColors.border)),
+          ),
+          child: SearchAnchor(
+            searchController: controller,
+            builder: (context, searchController) {
+              return SearchBar(
+                controller: searchController,
+                hintText: t.home.appbar.search_placeholder,
+                leading: const Icon(
+                  Icons.search,
+                  size: 18,
+                  color: AppColors.textMuted,
+                ),
+                onTap: searchController.openView,
+                onChanged: (_) => searchController.openView(),
+                shape: WidgetStatePropertyAll(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: const BorderSide(color: AppColors.border),
+                  ),
+                ),
+              );
+            },
+            suggestionsBuilder: (context, searchController) {
+              return const Iterable<Widget>.empty();
+            },
+            viewHintText: t.home.appbar.search_placeholder,
+            headerTextStyle: Theme.of(context).textTheme.titleMedium,
+            viewBackgroundColor: AppColors.surface,
+            dividerColor: AppColors.border,
+            isFullScreen: false,
+            shrinkWrap: true,
+            textInputAction: TextInputAction.search,
+            textCapitalization: TextCapitalization.none,
+            keyboardType: TextInputType.text,
+            viewOnChanged: (_) {
+              // Search logic will be added later.
+            },
+            viewOnSubmitted: (_) {
+              // Search logic will be added later.
+            },
+            viewBuilder: (suggestions) {
+              return ListView(
+                padding: const EdgeInsets.symmetric(vertical: 4),
+                children: suggestions.toList(),
+              );
+            },
+            viewPadding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
+            viewShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _FeedFilterChip extends StatelessWidget {
   const _FeedFilterChip({
     required this.label,
@@ -642,7 +727,6 @@ class _FeedCard extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class _AvatarBadge extends StatelessWidget {
