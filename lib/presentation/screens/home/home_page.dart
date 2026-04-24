@@ -7,6 +7,7 @@ import '../../../core/models/home_banner_item.dart';
 import '../../../core/models/home_feed_item.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../themes/app_colors.dart';
+import 'home_state.dart';
 import 'home_view_model.dart';
 
 @RoutePage()
@@ -40,6 +41,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final t = context.t;
     final theme = Theme.of(context);
     final state = ref.watch(homeViewModelProvider);
+    final feedItems = state.filteredFeedItems;
     final activeBannerIndex = state.banners.isEmpty
         ? 0
         : _activeBannerIndex.clamp(0, state.banners.length - 1);
@@ -142,64 +144,99 @@ class _HomePageState extends ConsumerState<HomePage> {
                               style: theme.textTheme.titleLarge,
                             ),
                           ),
-                          Text(
-                            t.home.feed_action,
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 16),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final width = constraints.maxWidth;
-                          final columns = width >= 1100
-                              ? 3
-                              : width >= 700
-                              ? 2
-                              : 1;
-                          return GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.feedItems.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: columns,
-                                  crossAxisSpacing: 16,
-                                  mainAxisSpacing: 16,
-                                  mainAxisExtent: columns == 1 ? 420 : 388,
-                                ),
-                            itemBuilder: (context, index) {
-                              final item = state.feedItems[index];
-                              return _FeedCard(
-                                item: item,
-                                onTap: () => _showFeedDetails(item),
-                              );
-                            },
-                          );
-                        },
+                      child: Wrap(
+                        spacing: 10,
+                        runSpacing: 10,
+                        children: [
+                          _FeedFilterChip(
+                            label: t.home.filters.newest,
+                            selected: state.currentFilter == HomeFeedFilter.newest,
+                            onTap: () => ref
+                                .read(homeViewModelProvider.notifier)
+                                .updateFilter(HomeFeedFilter.newest),
+                          ),
+                          _FeedFilterChip(
+                            label: t.home.filters.recommended,
+                            selected: state.currentFilter == HomeFeedFilter.recommended,
+                            onTap: () => ref
+                                .read(homeViewModelProvider.notifier)
+                                .updateFilter(HomeFeedFilter.recommended),
+                          ),
+                          _FeedFilterChip(
+                            label: t.home.filters.following,
+                            selected: state.currentFilter == HomeFeedFilter.following,
+                            onTap: () => ref
+                                .read(homeViewModelProvider.notifier)
+                                .updateFilter(HomeFeedFilter.following),
+                          ),
+                        ],
                       ),
                     ),
-                    if (state.isLoadingMore) ...[
-                      const SizedBox(height: 18),
-                      const Center(child: CircularProgressIndicator()),
-                    ] else if (state.hasMore) ...[
-                      const SizedBox(height: 18),
-                      Center(
-                        child: OutlinedButton(
-                          onPressed: () => ref
-                              .read(homeViewModelProvider.notifier)
-                              .loadMore(),
-                          child: Text(t.common.load_more_button),
-                        ),
-                      ),
-                    ],
                   ],
+                ),
+              ),
+            if (!state.isEmpty && state.isFilterEmpty)
+              SliverFillRemaining(
+                hasScrollBody: false,
+                child: _HomeFilteredEmptyView(
+                  title: t.home.following_empty_title,
+                  body: t.home.following_empty_body,
+                ),
+              )
+            else if (!state.isEmpty)
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
+                sliver: SliverLayoutBuilder(
+                  builder: (context, constraints) {
+                    final width = constraints.crossAxisExtent;
+                    final columns = width >= 1100
+                        ? 3
+                        : width >= 700
+                        ? 2
+                        : 1;
+                    return SliverGrid.builder(
+                      itemCount: feedItems.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: columns,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        mainAxisExtent: columns == 1 ? 420 : 388,
+                      ),
+                      itemBuilder: (context, index) {
+                        final item = feedItems[index];
+                        return _FeedCard(
+                          item: item,
+                          onTap: () => _showFeedDetails(item),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+            if (!state.isEmpty && !state.isFilterEmpty && state.isLoadingMore)
+              const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 28),
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+              )
+            else if (!state.isEmpty && !state.isFilterEmpty && state.hasMore)
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
+                  child: Center(
+                    child: OutlinedButton(
+                      onPressed: () =>
+                          ref.read(homeViewModelProvider.notifier).loadMore(),
+                      child: Text(t.common.load_more_button),
+                    ),
+                  ),
                 ),
               ),
           ],
@@ -341,6 +378,40 @@ class _HomePageState extends ConsumerState<HomePage> {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+}
+
+class _FeedFilterChip extends StatelessWidget {
+  const _FeedFilterChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: selected ? AppColors.primary : AppColors.surface,
+      borderRadius: BorderRadius.circular(999),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(999),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          child: Text(
+            label,
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: selected ? Colors.white : AppColors.textPrimary,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -835,6 +906,56 @@ class _HomeEmptyView extends StatelessWidget {
                 OutlinedButton(
                   onPressed: onRetry,
                   child: Text(t.common.retry_button),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeFilteredEmptyView extends StatelessWidget {
+  const _HomeFilteredEmptyView({required this.title, required this.body});
+
+  final String title;
+  final String body;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: BorderRadius.circular(28),
+            border: Border.all(color: AppColors.border),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.people_outline,
+                  size: 38,
+                  color: AppColors.primary,
+                ),
+                const SizedBox(height: 14),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  body,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
                 ),
               ],
             ),

@@ -119,8 +119,7 @@ class TranslationsHomeEn {
 	/// en: 'Latest updates'
 	String get feed_title => 'Latest updates';
 
-	/// en: 'See all'
-	String get feed_action => 'See all';
+	late final TranslationsHomeFiltersEn filters = TranslationsHomeFiltersEn.internal(_root);
 
 	/// en: 'Featured'
 	String get banner_chip => 'Featured';
@@ -163,6 +162,12 @@ class TranslationsHomeEn {
 
 	/// en: 'Views'
 	String get views_label => 'Views';
+
+	/// en: 'No followed creators yet'
+	String get following_empty_title => 'No followed creators yet';
+
+	/// en: 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.'
+	String get following_empty_body => 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.';
 }
 
 // Path: coordinate
@@ -303,6 +308,24 @@ class TranslationsMyPageEn {
 	String get badge => 'Account space';
 }
 
+// Path: home.filters
+class TranslationsHomeFiltersEn {
+	TranslationsHomeFiltersEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Newest'
+	String get newest => 'Newest';
+
+	/// en: 'Recommended'
+	String get recommended => 'Recommended';
+
+	/// en: 'Following'
+	String get following => 'Following';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -325,7 +348,9 @@ extension on Translations {
 			'home.headline' => 'Create, coordinate, and ship from one place.',
 			'home.lead' => 'A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.',
 			'home.feed_title' => 'Latest updates',
-			'home.feed_action' => 'See all',
+			'home.filters.newest' => 'Newest',
+			'home.filters.recommended' => 'Recommended',
+			'home.filters.following' => 'Following',
 			'home.banner_chip' => 'Featured',
 			'home.banner_fallback_title' => 'Open the latest highlight',
 			'home.feed_missing_preview' => 'This post is available without a prompt or caption preview yet.',
@@ -340,6 +365,8 @@ extension on Translations {
 			'home.posted_at_label' => 'Posted',
 			'home.creator_label' => 'Creator',
 			'home.views_label' => 'Views',
+			'home.following_empty_title' => 'No followed creators yet',
+			'home.following_empty_body' => 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.',
 			'coordinate.title' => 'Coordinate workspace',
 			'coordinate.description' => 'This protected area will host collaboration lanes, initiative tracking, and shared execution views.',
 			'coordinate.badge' => 'Protected preview',

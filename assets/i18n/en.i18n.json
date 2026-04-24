@@ -18,7 +18,11 @@
     "headline": "Create, coordinate, and ship from one place.",
     "lead": "A mobile-first public discovery surface inspired by the Next.js reference: live banners, posted images, and one shared navigation shell.",
     "feedTitle": "Latest updates",
-    "feedAction": "See all",
+    "filters": {
+      "newest": "Newest",
+      "recommended": "Recommended",
+      "following": "Following"
+    },
     "bannerChip": "Featured",
     "bannerFallbackTitle": "Open the latest highlight",
     "feedMissingPreview": "This post is available without a prompt or caption preview yet.",
@@ -32,7 +36,9 @@
     "linkError": "Unable to open the selected banner link.",
     "postedAtLabel": "Posted",
     "creatorLabel": "Creator",
-    "viewsLabel": "Views"
+    "viewsLabel": "Views",
+    "followingEmptyTitle": "No followed creators yet",
+    "followingEmptyBody": "Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific."
   },
   "coordinate": {
     "title": "Coordinate workspace",

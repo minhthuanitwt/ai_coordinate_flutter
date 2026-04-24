@@ -48,6 +48,13 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
     await _fetch(reset: false);
   }
 
+  void updateFilter(HomeFeedFilter filter) {
+    if (state.currentFilter == filter) {
+      return;
+    }
+    state = state.copyWith(currentFilter: filter);
+  }
+
   Future<void> _fetch({required bool reset}) async {
     try {
       if (!SupabaseService.instance.isConfigured) {

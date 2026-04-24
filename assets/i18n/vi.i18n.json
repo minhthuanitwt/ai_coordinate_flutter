@@ -18,7 +18,11 @@
     "headline": "Tao, dieu phoi va dua san pham ra ngoai trong mot noi.",
     "lead": "Be mat discovery public mobile-first cho Flutter lay cam hung tu app Next.js. Bao gom banner that, posted images that va app shell thong nhat.",
     "feedTitle": "Cap nhat moi",
-    "feedAction": "Xem tat ca",
+    "filters": {
+      "newest": "Moi nhat",
+      "recommended": "De xuat",
+      "following": "Dang theo doi"
+    },
     "bannerChip": "Noi bat",
     "bannerFallbackTitle": "Mo diem nhan moi nhat",
     "feedMissingPreview": "Post nay hien chua co preview prompt hoac caption.",
@@ -32,7 +36,9 @@
     "linkError": "Khong mo duoc link banner da chon.",
     "postedAtLabel": "Dang luc",
     "creatorLabel": "Creator",
-    "viewsLabel": "Luot xem"
+    "viewsLabel": "Luot xem",
+    "followingEmptyTitle": "Chua co creator dang theo doi",
+    "followingEmptyBody": "Muc Following hien dang dung bo loc tam thoi o local. Khi co them creator de tuong tac, muc nay se ro rang hon."
   },
   "coordinate": {
     "title": "Coordinate workspace",

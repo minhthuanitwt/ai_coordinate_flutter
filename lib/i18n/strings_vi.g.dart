@@ -88,7 +88,7 @@ class _TranslationsHomeVi extends TranslationsHomeEn {
 	@override String get headline => 'Tao, dieu phoi va dua san pham ra ngoai trong mot noi.';
 	@override String get lead => 'Be mat discovery public mobile-first cho Flutter lay cam hung tu app Next.js. Bao gom banner that, posted images that va app shell thong nhat.';
 	@override String get feed_title => 'Cap nhat moi';
-	@override String get feed_action => 'Xem tat ca';
+	@override late final _TranslationsHomeFiltersVi filters = _TranslationsHomeFiltersVi._(_root);
 	@override String get banner_chip => 'Noi bat';
 	@override String get banner_fallback_title => 'Mo diem nhan moi nhat';
 	@override String get feed_missing_preview => 'Post nay hien chua co preview prompt hoac caption.';
@@ -103,6 +103,8 @@ class _TranslationsHomeVi extends TranslationsHomeEn {
 	@override String get posted_at_label => 'Dang luc';
 	@override String get creator_label => 'Creator';
 	@override String get views_label => 'Luot xem';
+	@override String get following_empty_title => 'Chua co creator dang theo doi';
+	@override String get following_empty_body => 'Muc Following hien dang dung bo loc tam thoi o local. Khi co them creator de tuong tac, muc nay se ro rang hon.';
 }
 
 // Path: coordinate
@@ -181,6 +183,18 @@ class _TranslationsMyPageVi extends TranslationsMyPageEn {
 	@override String get badge => 'Account space';
 }
 
+// Path: home.filters
+class _TranslationsHomeFiltersVi extends TranslationsHomeFiltersEn {
+	_TranslationsHomeFiltersVi._(TranslationsVi root) : this._root = root, super.internal(root);
+
+	final TranslationsVi _root; // ignore: unused_field
+
+	// Translations
+	@override String get newest => 'Moi nhat';
+	@override String get recommended => 'De xuat';
+	@override String get following => 'Dang theo doi';
+}
+
 /// The flat map containing all translations for locale <vi>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -203,7 +217,9 @@ extension on TranslationsVi {
 			'home.headline' => 'Tao, dieu phoi va dua san pham ra ngoai trong mot noi.',
 			'home.lead' => 'Be mat discovery public mobile-first cho Flutter lay cam hung tu app Next.js. Bao gom banner that, posted images that va app shell thong nhat.',
 			'home.feed_title' => 'Cap nhat moi',
-			'home.feed_action' => 'Xem tat ca',
+			'home.filters.newest' => 'Moi nhat',
+			'home.filters.recommended' => 'De xuat',
+			'home.filters.following' => 'Dang theo doi',
 			'home.banner_chip' => 'Noi bat',
 			'home.banner_fallback_title' => 'Mo diem nhan moi nhat',
 			'home.feed_missing_preview' => 'Post nay hien chua co preview prompt hoac caption.',
@@ -218,6 +234,8 @@ extension on TranslationsVi {
 			'home.posted_at_label' => 'Dang luc',
 			'home.creator_label' => 'Creator',
 			'home.views_label' => 'Luot xem',
+			'home.following_empty_title' => 'Chua co creator dang theo doi',
+			'home.following_empty_body' => 'Muc Following hien dang dung bo loc tam thoi o local. Khi co them creator de tuong tac, muc nay se ro rang hon.',
 			'coordinate.title' => 'Coordinate workspace',
 			'coordinate.description' => 'Khu vuc protected nay se chua collaboration lane, initiative tracking va cac man hinh execution dung chung.',
 			'coordinate.badge' => 'Protected preview',
