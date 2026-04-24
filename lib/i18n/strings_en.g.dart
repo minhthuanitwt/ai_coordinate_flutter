@@ -55,6 +55,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final TranslationsHomeEn home = TranslationsHomeEn.internal(_root);
 	late final TranslationsCoordinateEn coordinate = TranslationsCoordinateEn.internal(_root);
 	late final TranslationsCommonEn common = TranslationsCommonEn.internal(_root);
+	late final TranslationsAuthEn auth = TranslationsAuthEn.internal(_root);
 	late final TranslationsChallengeEn challenge = TranslationsChallengeEn.internal(_root);
 	late final TranslationsNotificationsEn notifications = TranslationsNotificationsEn.internal(_root);
 	late final TranslationsMyPageEn my_page = TranslationsMyPageEn.internal(_root);
@@ -76,6 +77,18 @@ class TranslationsShellEn {
 
 	/// en: 'Phase-1 Flutter shell mirrored from the reference Next.js product.'
 	String get footer_tagline => 'Phase-1 Flutter shell mirrored from the reference Next.js product.';
+
+	/// en: 'Log in'
+	String get login_cta => 'Log in';
+
+	/// en: 'Log out'
+	String get logout_cta => 'Log out';
+
+	/// en: 'Guest mode'
+	String get guest_badge => 'Guest mode';
+
+	/// en: 'Signed in'
+	String get member_badge => 'Signed in';
 }
 
 // Path: nav
@@ -166,8 +179,8 @@ class TranslationsHomeEn {
 	/// en: 'No followed creators yet'
 	String get following_empty_title => 'No followed creators yet';
 
-	/// en: 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.'
-	String get following_empty_body => 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.';
+	/// en: 'No posts from creators you follow yet. Follow more creators or check back later.'
+	String get following_empty_body => 'No posts from creators you follow yet. Follow more creators or check back later.';
 }
 
 // Path: coordinate
@@ -252,6 +265,57 @@ class TranslationsCommonEn {
 
 	/// en: 'Load more'
 	String get load_more_button => 'Load more';
+}
+
+// Path: auth
+class TranslationsAuthEn {
+	TranslationsAuthEn.internal(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// en: 'Log in'
+	String get login_title => 'Log in';
+
+	/// en: 'Sign in to open coordinate, challenge, notifications, and your page.'
+	String get login_description => 'Sign in to open coordinate, challenge, notifications, and your page.';
+
+	/// en: 'Email'
+	String get email_label => 'Email';
+
+	/// en: 'Password'
+	String get password_label => 'Password';
+
+	/// en: 'Log in'
+	String get login_action => 'Log in';
+
+	/// en: 'Back to Home'
+	String get back_home_action => 'Back to Home';
+
+	/// en: 'Log out'
+	String get logout_action => 'Log out';
+
+	/// en: 'Logging in...'
+	String get logging_in => 'Logging in...';
+
+	/// en: 'Unable to sign in right now.'
+	String get login_failed => 'Unable to sign in right now.';
+
+	/// en: 'Enter both email and password.'
+	String get validation_missing_credentials => 'Enter both email and password.';
+
+	/// en: 'If Supabase is not configured, the app uses a local mock session for this basic flow.'
+	String get login_hint => 'If Supabase is not configured, the app uses a local mock session for this basic flow.';
+
+	/// en: 'Login required'
+	String get required_title => 'Login required';
+
+	/// en: 'This tab is available only after you log in.'
+	String get required_body => 'This tab is available only after you log in.';
+
+	/// en: 'Your session is no longer available. Please log in again.'
+	String get session_expired => 'Your session is no longer available. Please log in again.';
 }
 
 // Path: challenge
@@ -340,6 +404,10 @@ extension on Translations {
 			'shell.subtitle' => 'Coordinate your AI workflow across one lightweight app.',
 			'shell.header_title' => 'Today on Persta.AI',
 			'shell.footer_tagline' => 'Phase-1 Flutter shell mirrored from the reference Next.js product.',
+			'shell.login_cta' => 'Log in',
+			'shell.logout_cta' => 'Log out',
+			'shell.guest_badge' => 'Guest mode',
+			'shell.member_badge' => 'Signed in',
 			'nav.home' => 'Home',
 			'nav.coordinate' => 'Coordinate',
 			'nav.challenge' => 'Challenge',
@@ -366,7 +434,7 @@ extension on Translations {
 			'home.creator_label' => 'Creator',
 			'home.views_label' => 'Views',
 			'home.following_empty_title' => 'No followed creators yet',
-			'home.following_empty_body' => 'Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific.',
+			'home.following_empty_body' => 'No posts from creators you follow yet. Follow more creators or check back later.',
 			'coordinate.title' => 'Coordinate workspace',
 			'coordinate.description' => 'This protected area will host collaboration lanes, initiative tracking, and shared execution views.',
 			'coordinate.badge' => 'Protected preview',
@@ -389,6 +457,20 @@ extension on Translations {
 			'coordinate.config_body' => 'This board reads live data from Supabase. Provide SUPABASE_URL and SUPABASE_ANON_KEY for this build.',
 			'common.retry_button' => 'Try again',
 			'common.load_more_button' => 'Load more',
+			'auth.login_title' => 'Log in',
+			'auth.login_description' => 'Sign in to open coordinate, challenge, notifications, and your page.',
+			'auth.email_label' => 'Email',
+			'auth.password_label' => 'Password',
+			'auth.login_action' => 'Log in',
+			'auth.back_home_action' => 'Back to Home',
+			'auth.logout_action' => 'Log out',
+			'auth.logging_in' => 'Logging in...',
+			'auth.login_failed' => 'Unable to sign in right now.',
+			'auth.validation_missing_credentials' => 'Enter both email and password.',
+			'auth.login_hint' => 'If Supabase is not configured, the app uses a local mock session for this basic flow.',
+			'auth.required_title' => 'Login required',
+			'auth.required_body' => 'This tab is available only after you log in.',
+			'auth.session_expired' => 'Your session is no longer available. Please log in again.',
 			'challenge.title' => 'Challenge board',
 			'challenge.description' => 'This protected page is reserved for challenge campaigns, submissions, and progress checkpoints.',
 			'challenge.badge' => 'Members only',

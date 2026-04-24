@@ -1,16 +1,32 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../i18n/strings.g.dart';
+import '../../components/auth_required_state.dart';
+import '../../providers/auth_session_provider.dart';
+import '../../../routes/app_router.dart';
 import '../../../themes/app_colors.dart';
 
 @RoutePage()
-class NotificationsPage extends StatelessWidget {
+class NotificationsPage extends ConsumerWidget {
   const NotificationsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = context.t;
+    final isAuthenticated = ref.watch(isAuthenticatedProvider);
+    if (!isAuthenticated) {
+      return AuthRequiredState(
+        title: t.auth.required_title,
+        description: t.auth.required_body,
+        onLogin: () {
+          ref.read(authRedirectTargetProvider.notifier).state =
+              ProtectedDestination.notifications;
+          context.router.root.replace(const LoginRoute());
+        },
+      );
+    }
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 620),

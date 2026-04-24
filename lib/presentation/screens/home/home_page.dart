@@ -41,7 +41,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final t = context.t;
     final theme = Theme.of(context);
     final state = ref.watch(homeViewModelProvider);
-    final feedItems = state.filteredFeedItems;
+    final feedItems = state.feedItems;
     final activeBannerIndex = state.banners.isEmpty
         ? 0
         : _activeBannerIndex.clamp(0, state.banners.length - 1);
@@ -157,23 +157,29 @@ class _HomePageState extends ConsumerState<HomePage> {
                           _FeedFilterChip(
                             label: t.home.filters.newest,
                             selected: state.currentFilter == HomeFeedFilter.newest,
-                            onTap: () => ref
-                                .read(homeViewModelProvider.notifier)
-                                .updateFilter(HomeFeedFilter.newest),
+                            onTap: () {
+                              ref
+                                  .read(homeViewModelProvider.notifier)
+                                  .updateFilter(HomeFeedFilter.newest);
+                            },
                           ),
                           _FeedFilterChip(
                             label: t.home.filters.recommended,
                             selected: state.currentFilter == HomeFeedFilter.recommended,
-                            onTap: () => ref
-                                .read(homeViewModelProvider.notifier)
-                                .updateFilter(HomeFeedFilter.recommended),
+                            onTap: () {
+                              ref
+                                  .read(homeViewModelProvider.notifier)
+                                  .updateFilter(HomeFeedFilter.recommended);
+                            },
                           ),
                           _FeedFilterChip(
                             label: t.home.filters.following,
                             selected: state.currentFilter == HomeFeedFilter.following,
-                            onTap: () => ref
-                                .read(homeViewModelProvider.notifier)
-                                .updateFilter(HomeFeedFilter.following),
+                            onTap: () {
+                              ref
+                                  .read(homeViewModelProvider.notifier)
+                                  .updateFilter(HomeFeedFilter.following);
+                            },
                           ),
                         ],
                       ),

@@ -47,6 +47,7 @@ class TranslationsJa extends Translations with BaseTranslations<AppLocale, Trans
 	@override late final _TranslationsHomeJa home = _TranslationsHomeJa._(_root);
 	@override late final _TranslationsCoordinateJa coordinate = _TranslationsCoordinateJa._(_root);
 	@override late final _TranslationsCommonJa common = _TranslationsCommonJa._(_root);
+	@override late final _TranslationsAuthJa auth = _TranslationsAuthJa._(_root);
 	@override late final _TranslationsChallengeJa challenge = _TranslationsChallengeJa._(_root);
 	@override late final _TranslationsNotificationsJa notifications = _TranslationsNotificationsJa._(_root);
 	@override late final _TranslationsMyPageJa my_page = _TranslationsMyPageJa._(_root);
@@ -62,6 +63,10 @@ class _TranslationsShellJa extends TranslationsShellEn {
 	@override String get subtitle => '軽量な1つのアプリでAIワークフローを整理します。';
 	@override String get header_title => '今日のPersta.AI';
 	@override String get footer_tagline => '参照元のNext.jsプロダクトをもとにしたPhase 1のFlutterシェルです。';
+	@override String get login_cta => 'ログイン';
+	@override String get logout_cta => 'ログアウト';
+	@override String get guest_badge => 'ゲスト';
+	@override String get member_badge => 'ログイン中';
 }
 
 // Path: nav
@@ -104,7 +109,7 @@ class _TranslationsHomeJa extends TranslationsHomeEn {
 	@override String get creator_label => 'Creator';
 	@override String get views_label => '閲覧数';
 	@override String get following_empty_title => 'フォロー中のクリエイターはいません';
-	@override String get following_empty_body => 'Following は現在一時的なローカルフィルターです。より多くのクリエイターとやり取りすると、このタブはより意味のある内容になります。';
+	@override String get following_empty_body => 'フォロー中のクリエイターの投稿はまだありません。フォローを増やすか、あとで再度確認してください。';
 }
 
 // Path: coordinate
@@ -145,6 +150,29 @@ class _TranslationsCommonJa extends TranslationsCommonEn {
 	// Translations
 	@override String get retry_button => '再試行';
 	@override String get load_more_button => 'もっと見る';
+}
+
+// Path: auth
+class _TranslationsAuthJa extends TranslationsAuthEn {
+	_TranslationsAuthJa._(TranslationsJa root) : this._root = root, super.internal(root);
+
+	final TranslationsJa _root; // ignore: unused_field
+
+	// Translations
+	@override String get login_title => 'ログイン';
+	@override String get login_description => 'Coordinate、Challenge、Notifications、My Page を開くにはログインが必要です。';
+	@override String get email_label => 'メールアドレス';
+	@override String get password_label => 'パスワード';
+	@override String get login_action => 'ログイン';
+	@override String get back_home_action => 'ホームへ戻る';
+	@override String get logout_action => 'ログアウト';
+	@override String get logging_in => 'ログイン中...';
+	@override String get login_failed => '現在ログインできません。';
+	@override String get validation_missing_credentials => 'メールアドレスとパスワードを入力してください。';
+	@override String get login_hint => 'Supabase が未設定の場合、この基本フローではローカルのモックセッションを使用します。';
+	@override String get required_title => 'ログインが必要です';
+	@override String get required_body => 'このタブはログイン後に利用できます。';
+	@override String get session_expired => 'セッションを確認できませんでした。再度ログインしてください。';
 }
 
 // Path: challenge
@@ -209,6 +237,10 @@ extension on TranslationsJa {
 			'shell.subtitle' => '軽量な1つのアプリでAIワークフローを整理します。',
 			'shell.header_title' => '今日のPersta.AI',
 			'shell.footer_tagline' => '参照元のNext.jsプロダクトをもとにしたPhase 1のFlutterシェルです。',
+			'shell.login_cta' => 'ログイン',
+			'shell.logout_cta' => 'ログアウト',
+			'shell.guest_badge' => 'ゲスト',
+			'shell.member_badge' => 'ログイン中',
 			'nav.home' => 'ホーム',
 			'nav.coordinate' => 'コーディネート',
 			'nav.challenge' => 'チャレンジ',
@@ -235,7 +267,7 @@ extension on TranslationsJa {
 			'home.creator_label' => 'Creator',
 			'home.views_label' => '閲覧数',
 			'home.following_empty_title' => 'フォロー中のクリエイターはいません',
-			'home.following_empty_body' => 'Following は現在一時的なローカルフィルターです。より多くのクリエイターとやり取りすると、このタブはより意味のある内容になります。',
+			'home.following_empty_body' => 'フォロー中のクリエイターの投稿はまだありません。フォローを増やすか、あとで再度確認してください。',
 			'coordinate.title' => 'コーディネート ワークスペース',
 			'coordinate.description' => 'このエリアでは共同作業レーン、施策の追跡、共有実行ビューを扱う予定です。',
 			'coordinate.badge' => 'プレビュー',
@@ -258,6 +290,20 @@ extension on TranslationsJa {
 			'coordinate.config_body' => 'このボードはSupabaseからライブデータを読み込みます。このビルドにはSUPABASE_URLとSUPABASE_ANON_KEYを設定してください。',
 			'common.retry_button' => '再試行',
 			'common.load_more_button' => 'もっと見る',
+			'auth.login_title' => 'ログイン',
+			'auth.login_description' => 'Coordinate、Challenge、Notifications、My Page を開くにはログインが必要です。',
+			'auth.email_label' => 'メールアドレス',
+			'auth.password_label' => 'パスワード',
+			'auth.login_action' => 'ログイン',
+			'auth.back_home_action' => 'ホームへ戻る',
+			'auth.logout_action' => 'ログアウト',
+			'auth.logging_in' => 'ログイン中...',
+			'auth.login_failed' => '現在ログインできません。',
+			'auth.validation_missing_credentials' => 'メールアドレスとパスワードを入力してください。',
+			'auth.login_hint' => 'Supabase が未設定の場合、この基本フローではローカルのモックセッションを使用します。',
+			'auth.required_title' => 'ログインが必要です',
+			'auth.required_body' => 'このタブはログイン後に利用できます。',
+			'auth.session_expired' => 'セッションを確認できませんでした。再度ログインしてください。',
 			'challenge.title' => 'チャレンジボード',
 			'challenge.description' => 'このページはチャレンジ施策、応募、進捗チェックポイントのために用意されています。',
 			'challenge.badge' => 'メンバー限定',

@@ -2,6 +2,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/home_banner_item.dart';
 import '../../../core/models/home_feed_item.dart';
+import '../../providers/auth_session_provider.dart';
+import '../../../domain/repository/home_repository.dart';
 import '../../../services/supabase_home_repository.dart';
 import '../../../services/supabase_service.dart';
 import 'home_state.dart';
@@ -14,7 +16,7 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
 
   @override
   HomeState build() {
-    return const HomeState.initial();
+    return HomeState.initial();
   }
 
   Future<void> loadInitial() async {
@@ -24,7 +26,7 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
       isLoading: true,
       isLoadingMore: false,
       hasMore: true,
-      clearError: true,
+      errorCode: null,
     );
     await _fetch(reset: true);
   }
@@ -34,7 +36,7 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
       isLoading: true,
       isLoadingMore: false,
       hasMore: true,
-      clearError: true,
+      errorCode: null,
     );
     await _fetch(reset: true);
   }
@@ -44,18 +46,25 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
       return;
     }
 
-    state = state.copyWith(isLoadingMore: true, clearError: true);
+    state = state.copyWith(isLoadingMore: true, errorCode: null);
     await _fetch(reset: false);
   }
 
-  void updateFilter(HomeFeedFilter filter) {
+  Future<void> updateFilter(HomeFeedFilter filter) async {
     if (state.currentFilter == filter) {
       return;
     }
-    state = state.copyWith(currentFilter: filter);
+    state = state.copyWith(
+      currentFilter: filter,
+      isLoading: false,
+      isLoadingMore: true,
+      hasMore: true,
+      errorCode: null,
+    );
+    await _fetch(reset: true, reloadBanners: false);
   }
 
-  Future<void> _fetch({required bool reset}) async {
+  Future<void> _fetch({required bool reset, bool reloadBanners = true}) async {
     try {
       if (!SupabaseService.instance.isConfigured) {
         state = state.copyWith(
@@ -69,13 +78,25 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
 
       final repository = ref.read(homeRepositoryProvider);
       final offset = reset ? 0 : state.feedItems.length;
+      final sort = switch (state.currentFilter) {
+        HomeFeedFilter.newest => HomeFeedSort.newest,
+        HomeFeedFilter.recommended => HomeFeedSort.recommended,
+        HomeFeedFilter.following => HomeFeedSort.following,
+      };
+      final viewerUserId =
+          ref.read(authSessionProvider).valueOrNull?.userId?.trim();
 
       final results = await Future.wait([
-        if (reset)
+        if (reloadBanners)
           repository.listHomeBanners()
         else
           Future.value(state.banners),
-        repository.listHomeFeedItems(limit: _pageSize, offset: offset),
+        repository.listHomeFeedItems(
+          limit: _pageSize,
+          offset: offset,
+          sort: sort,
+          viewerUserId: viewerUserId,
+        ),
       ]);
 
       final banners = results[0] as List<HomeBannerItem>;
@@ -90,7 +111,7 @@ class HomeViewModel extends AutoDisposeNotifier<HomeState> {
         isLoading: false,
         isLoadingMore: false,
         hasMore: nextFeedItems.length == _pageSize,
-        clearError: true,
+        errorCode: null,
       );
     } catch (_) {
       state = state.copyWith(

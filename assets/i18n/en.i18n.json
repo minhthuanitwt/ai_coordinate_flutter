@@ -5,7 +5,11 @@
   "shell": {
     "subtitle": "Coordinate your AI workflow across one lightweight app.",
     "headerTitle": "Today on Persta.AI",
-    "footerTagline": "Phase-1 Flutter shell mirrored from the reference Next.js product."
+    "footerTagline": "Phase-1 Flutter shell mirrored from the reference Next.js product.",
+    "loginCta": "Log in",
+    "logoutCta": "Log out",
+    "guestBadge": "Guest mode",
+    "memberBadge": "Signed in"
   },
   "nav": {
     "home": "Home",
@@ -38,7 +42,7 @@
     "creatorLabel": "Creator",
     "viewsLabel": "Views",
     "followingEmptyTitle": "No followed creators yet",
-    "followingEmptyBody": "Following is using a temporary local filter for now. Interact with more creators first, then this tab will feel more specific."
+    "followingEmptyBody": "No posts from creators you follow yet. Follow more creators or check back later."
   },
   "coordinate": {
     "title": "Coordinate workspace",
@@ -65,6 +69,22 @@
   "common": {
     "retryButton": "Try again",
     "loadMoreButton": "Load more"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "loginDescription": "Sign in to open coordinate, challenge, notifications, and your page.",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "loginAction": "Log in",
+    "backHomeAction": "Back to Home",
+    "logoutAction": "Log out",
+    "loggingIn": "Logging in...",
+    "loginFailed": "Unable to sign in right now.",
+    "validationMissingCredentials": "Enter both email and password.",
+    "loginHint": "If Supabase is not configured, the app uses a local mock session for this basic flow.",
+    "requiredTitle": "Login required",
+    "requiredBody": "This tab is available only after you log in.",
+    "sessionExpired": "Your session is no longer available. Please log in again."
   },
   "challenge": {
     "title": "Challenge board",

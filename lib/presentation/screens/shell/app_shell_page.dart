@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../i18n/strings.g.dart';
+import '../../providers/auth_session_provider.dart';
 import '../../../routes/app_router.dart';
 import '../../../themes/app_colors.dart';
 
@@ -13,6 +14,8 @@ class AppShellPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = context.t;
+    final authSession = ref.watch(authSessionProvider).valueOrNull;
+    final isAuthenticated = authSession?.isAuthenticated ?? false;
 
     return AutoTabsRouter(
       routes: const [
@@ -53,6 +56,17 @@ class AppShellPage extends ConsumerWidget {
         ];
 
         void openIndex(int index) {
+          final protectedTarget = _protectedTargetForIndex(index);
+          if (protectedTarget != null && !isAuthenticated) {
+            ref.read(authRedirectTargetProvider.notifier).state = protectedTarget;
+            final messenger = ScaffoldMessenger.maybeOf(context);
+            messenger?.clearSnackBars();
+            messenger?.showSnackBar(
+              SnackBar(content: Text(t.auth.required_body)),
+            );
+            context.router.root.push(const LoginRoute());
+            return;
+          }
           tabsRouter.setActiveIndex(index);
         }
 
@@ -73,6 +87,10 @@ class AppShellPage extends ConsumerWidget {
                         child: Column(
                           children: [
                             const _ShellHeader(),
+                            _SessionBanner(
+                              isAuthenticated: isAuthenticated,
+                              email: authSession?.email,
+                            ),
                             Expanded(child: child),
                             const _ShellFooter(),
                           ],
@@ -83,6 +101,10 @@ class AppShellPage extends ConsumerWidget {
                 : Column(
                     children: [
                       const _ShellHeader(),
+                      _SessionBanner(
+                        isAuthenticated: isAuthenticated,
+                        email: authSession?.email,
+                      ),
                       Expanded(child: child),
                     ],
                   ),
@@ -105,6 +127,16 @@ class AppShellPage extends ConsumerWidget {
         );
       },
     );
+  }
+
+  ProtectedDestination? _protectedTargetForIndex(int index) {
+    return switch (index) {
+      1 => ProtectedDestination.coordinate,
+      2 => ProtectedDestination.challenge,
+      3 => ProtectedDestination.notifications,
+      4 => ProtectedDestination.myPage,
+      _ => null,
+    };
   }
 }
 
@@ -209,12 +241,14 @@ class _SidebarTile extends StatelessWidget {
   }
 }
 
-class _ShellHeader extends StatelessWidget {
+class _ShellHeader extends ConsumerWidget {
   const _ShellHeader();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = context.t;
+    final authSession = ref.watch(authSessionProvider).valueOrNull;
+    final isAuthenticated = authSession?.isAuthenticated ?? false;
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
       decoration: const BoxDecoration(
@@ -241,7 +275,53 @@ class _ShellHeader extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(width: 12),
+          if (isAuthenticated)
+            OutlinedButton.icon(
+              onPressed: () async {
+                await ref.read(authRepositoryProvider).signOut();
+                ref.read(authRedirectTargetProvider.notifier).state = null;
+              },
+              icon: const Icon(Icons.logout_outlined),
+              label: Text(t.shell.logout_cta),
+            )
+          else
+            FilledButton.icon(
+              onPressed: () {
+                context.router.root.push(const LoginRoute());
+              },
+              icon: const Icon(Icons.login),
+              label: Text(t.shell.login_cta),
+            ),
         ],
+      ),
+    );
+  }
+}
+
+class _SessionBanner extends StatelessWidget {
+  const _SessionBanner({required this.isAuthenticated, required this.email});
+
+  final bool isAuthenticated;
+  final String? email;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.t;
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      decoration: const BoxDecoration(
+        color: AppColors.surface,
+        border: Border(bottom: BorderSide(color: AppColors.border)),
+      ),
+      child: Text(
+        isAuthenticated
+            ? '${t.shell.member_badge}: ${email ?? ''}'
+            : t.shell.guest_badge,
+        style: Theme.of(
+          context,
+        ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
       ),
     );
   }

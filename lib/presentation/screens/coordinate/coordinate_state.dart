@@ -1,44 +1,31 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../core/models/coordinate_item.dart';
 import '../../../services/supabase_service.dart';
 
-class CoordinateState {
-  const CoordinateState({
-    required this.items,
-    required this.isLoading,
-    required this.isLoadingMore,
-    required this.hasMore,
-    this.errorCode,
-  });
+part 'coordinate_state.freezed.dart';
 
-  const CoordinateState.initial()
-    : items = const [],
-      isLoading = true,
-      isLoadingMore = false,
-      hasMore = true,
-      errorCode = null;
+@freezed
+class CoordinateState with _$CoordinateState {
+  const CoordinateState._();
 
-  final List<CoordinateItem> items;
-  final bool isLoading;
-  final bool isLoadingMore;
-  final bool hasMore;
-  final String? errorCode;
+  const factory CoordinateState({
+    required List<CoordinateItem> items,
+    required bool isLoading,
+    required bool isLoadingMore,
+    required bool hasMore,
+    required bool requiresAuth,
+    String? errorCode,
+  }) = _CoordinateState;
+
+  factory CoordinateState.initial() => const CoordinateState(
+    items: [],
+    isLoading: true,
+    isLoadingMore: false,
+    hasMore: true,
+    requiresAuth: false,
+    errorCode: null,
+  );
 
   bool get isConfigured => SupabaseService.instance.isConfigured;
-
-  CoordinateState copyWith({
-    List<CoordinateItem>? items,
-    bool? isLoading,
-    bool? isLoadingMore,
-    bool? hasMore,
-    String? errorCode,
-    bool clearError = false,
-  }) {
-    return CoordinateState(
-      items: items ?? this.items,
-      isLoading: isLoading ?? this.isLoading,
-      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
-      hasMore: hasMore ?? this.hasMore,
-      errorCode: clearError ? null : errorCode ?? this.errorCode,
-    );
-  }
 }

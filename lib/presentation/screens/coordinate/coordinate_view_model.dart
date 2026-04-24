@@ -14,7 +14,7 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
 
   @override
   CoordinateState build() {
-    return const CoordinateState.initial();
+    return CoordinateState.initial();
   }
 
   Future<void> loadInitial() async {
@@ -24,9 +24,10 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
     state = state.copyWith(
       isLoading: true,
       isLoadingMore: false,
-      clearError: true,
+      errorCode: null,
       items: const [],
       hasMore: true,
+      requiresAuth: false,
     );
     await _fetchPage(reset: true);
   }
@@ -35,8 +36,9 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
     state = state.copyWith(
       isLoading: true,
       isLoadingMore: false,
-      clearError: true,
+      errorCode: null,
       hasMore: true,
+      requiresAuth: false,
     );
     await _fetchPage(reset: true);
   }
@@ -45,7 +47,7 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
     if (state.isLoading || state.isLoadingMore || !state.hasMore) {
       return;
     }
-    state = state.copyWith(isLoadingMore: true, clearError: true);
+    state = state.copyWith(isLoadingMore: true, errorCode: null);
     await _fetchPage(reset: false);
   }
 
@@ -68,7 +70,8 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
           items: const [],
           isLoading: false,
           isLoadingMore: false,
-          clearError: true,
+          requiresAuth: true,
+          errorCode: null,
           hasMore: false,
         );
         return;
@@ -89,7 +92,8 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
         isLoading: false,
         isLoadingMore: false,
         hasMore: nextItems.length == _pageSize,
-        clearError: true,
+        requiresAuth: false,
+        errorCode: null,
       );
     } catch (_) {
       state = state.copyWith(

@@ -19,4 +19,8 @@ class LocalStorageService {
     }
     return prefs;
   }
+
+  static void debugReset() {
+    _prefs = null;
+  }
 }

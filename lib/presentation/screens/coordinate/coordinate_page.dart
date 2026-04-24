@@ -4,6 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/models/coordinate_item.dart';
 import '../../../i18n/strings.g.dart';
+import '../../components/auth_required_state.dart';
+import '../../providers/auth_session_provider.dart';
+import '../../../routes/app_router.dart';
 import '../../../themes/app_colors.dart';
 import 'coordinate_view_model.dart';
 
@@ -16,6 +19,8 @@ class CoordinatePage extends ConsumerStatefulWidget {
 }
 
 class _CoordinatePageState extends ConsumerState<CoordinatePage> {
+  bool _handledGuestRedirect = false;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +34,32 @@ class _CoordinatePageState extends ConsumerState<CoordinatePage> {
     final t = context.t;
 
     final state = ref.watch(coordinateViewModelProvider);
+    final authSession = ref.watch(authSessionProvider).valueOrNull;
+    final isAuthenticated = authSession?.isAuthenticated ?? false;
+
+    if (!isAuthenticated && !_handledGuestRedirect) {
+      _handledGuestRedirect = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+        ref.read(authRedirectTargetProvider.notifier).state =
+            ProtectedDestination.coordinate;
+        context.router.root.replace(const LoginRoute());
+      });
+    }
+
+    if (!isAuthenticated || state.requiresAuth) {
+      return AuthRequiredState(
+        title: t.auth.required_title,
+        description: t.auth.required_body,
+        onLogin: () {
+          ref.read(authRedirectTargetProvider.notifier).state =
+              ProtectedDestination.coordinate;
+          context.router.root.replace(const LoginRoute());
+        },
+      );
+    }
 
     return RefreshIndicator(
       onRefresh: ref.read(coordinateViewModelProvider.notifier).refresh,
