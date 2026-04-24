@@ -91,17 +91,17 @@ class LoginRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MyProfilePage]
-class MyProfileRoute extends PageRouteInfo<void> {
-  const MyProfileRoute({List<PageRouteInfo>? children})
-    : super(MyProfileRoute.name, initialChildren: children);
+/// [MyPagePage]
+class MyPageRoute extends PageRouteInfo<void> {
+  const MyPageRoute({List<PageRouteInfo>? children})
+    : super(MyPageRoute.name, initialChildren: children);
 
-  static const String name = 'MyProfileRoute';
+  static const String name = 'MyPageRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MyProfilePage();
+      return const MyPagePage();
     },
   );
 }

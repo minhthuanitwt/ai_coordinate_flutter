@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../i18n/strings.g.dart';
-import '../../providers/auth_session_provider.dart';
 import '../../../routes/app_router.dart';
 import '../../../themes/app_colors.dart';
+import '../../providers/auth_session_provider.dart';
 
 @RoutePage()
 class AppShellPage extends ConsumerWidget {
@@ -23,7 +23,7 @@ class AppShellPage extends ConsumerWidget {
         CoordinateRoute(),
         ChallengeRoute(),
         NotificationsRoute(),
-        MyProfileRoute(),
+        MyPageRoute(),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
@@ -58,7 +58,8 @@ class AppShellPage extends ConsumerWidget {
         void openIndex(int index) {
           final protectedTarget = _protectedTargetForIndex(index);
           if (protectedTarget != null && !isAuthenticated) {
-            ref.read(authRedirectTargetProvider.notifier).state = protectedTarget;
+            ref.read(authRedirectTargetProvider.notifier).state =
+                protectedTarget;
             final messenger = ScaffoldMessenger.maybeOf(context);
             messenger?.clearSnackBars();
             messenger?.showSnackBar(
@@ -261,11 +262,6 @@ class _ShellHeader extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  t.shell.header_title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 6),
                 Text(
                   t.shell.subtitle,
                   style: Theme.of(

@@ -4,7 +4,7 @@ import '../presentation/screens/auth/login_page.dart';
 import '../presentation/screens/challenge/challenge_page.dart';
 import '../presentation/screens/coordinate/coordinate_page.dart';
 import '../presentation/screens/home/home_page.dart';
-import '../presentation/screens/my_profile/my_profile_page.dart';
+import '../presentation/screens/my_page/my_page_page.dart';
 import '../presentation/screens/notifications/notifications_page.dart';
 import '../presentation/screens/shell/app_shell_page.dart';
 
@@ -24,7 +24,7 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: CoordinateRoute.page, path: 'coordinate'),
         AutoRoute(page: ChallengeRoute.page, path: 'challenge'),
         AutoRoute(page: NotificationsRoute.page, path: 'notifications'),
-        AutoRoute(page: MyProfileRoute.page, path: 'my-page'),
+        AutoRoute(page: MyPageRoute.page, path: 'my-page'),
       ],
     ),
   ];

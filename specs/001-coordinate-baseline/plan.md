@@ -1,105 +1,104 @@
-# Implementation Plan: Auth-Gated Protected Tabs
+# Implementation Plan: [FEATURE]
 
-**Branch**: `20260424-auth-gated-tabs` | **Date**: 2026-04-24 | **Spec**: [/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/specs/001-coordinate-baseline/spec.md](/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/specs/001-coordinate-baseline/spec.md)
-**Input**: Feature specification from `/specs/001-coordinate-baseline/spec.md`
+**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+
+**Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/plan-template.md` for the execution workflow.
 
 ## Summary
 
-Reintroduce a minimal authentication flow so `coordinate`, `challenge`,
-`notifications`, and `my-page` become protected tabs again, while `home`
-remains public. The Flutter app should follow the existing architecture
-(`auto_route` + Riverpod + Supabase bootstrap), use a dedicated login screen,
-and apply auth gating at navigation entry plus runtime session-loss handling.
-The design should stay intentionally narrower than the Next.js reference: only
-the login surface and protected-tab access rules are required for this slice.
+[Extract from feature spec: primary requirement + technical approach from research]
 
 ## Technical Context
 
-**Language/Version**: Dart 3.10.0, Flutter 3.38.9  
-**Primary Dependencies**: `auto_route`, `hooks_riverpod`, `flutter_hooks`,
-`supabase_flutter`, `slang`, `shared_preferences`  
-**Storage**: Supabase Auth session storage via `supabase_flutter`; local device
-preferences already initialized through `shared_preferences`  
-**Testing**: `flutter_test`, `dart analyze`, targeted widget tests for route
-guard and auth screen state  
-**Target Platform**: Flutter mobile app baseline, primarily Android/iOS with
-desktop/web shell support still present  
-**Project Type**: Flutter mobile application  
-**Performance Goals**: Protected-tab checks should resolve without perceptible
-navigation lag and should not block public home rendering  
-**Constraints**: Preserve current app shell and screen structure, keep `home`
-public, degrade cleanly when Supabase is not configured, regenerate generated
-router/i18n artifacts instead of editing them manually  
-**Scale/Scope**: One login route, one shared session source, four protected tab
-destinations, and shell-level navigation updates
+<!--
+  ACTION REQUIRED: Replace the content in this section with the technical details
+  for the project. The structure here is presented in advisory capacity to guide
+  the iteration process.
+-->
+
+**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
+**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
+**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
+**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]  
+**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
+**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
+**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- **Documentation Before Implementation**: Pass. This plan, plus research and
-  design artifacts, define the change before code.
-- **Minimal Scoped Delivery**: Pass. Scope is limited to login and protected-tab
-  access, not full account management or signup recovery flows.
-- **Existing Architecture First**: Pass. Design retains `auto_route`,
-  Riverpod, Supabase bootstrap, and current page/state/view-model structure.
-- **Generated Artifacts Are Regenerated**: Pass. Router and i18n changes will be
-  made through source files and regeneration.
-- **Verification Is Mandatory**: Pass. Plan includes `dart analyze` plus
-  targeted widget or router tests for guest-to-login redirection and
-  authenticated access.
-
-**Post-Design Re-Check**: Pass. Phase 1 artifacts stay inside the existing
-Flutter architecture and do not introduce unjustified complexity.
+[Gates determined based on constitution file]
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```text
-specs/001-coordinate-baseline/
-├── plan.md
-├── research.md
-├── data-model.md
-├── quickstart.md
-├── contracts/
-│   └── protected-navigation.md
-└── tasks.md
+specs/[###-feature]/
+├── plan.md              # This file (/speckit.plan command output)
+├── research.md          # Phase 0 output (/speckit.plan command)
+├── data-model.md        # Phase 1 output (/speckit.plan command)
+├── quickstart.md        # Phase 1 output (/speckit.plan command)
+├── contracts/           # Phase 1 output (/speckit.plan command)
+└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
 ```
 
 ### Source Code (repository root)
+<!--
+  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
+  for this feature. Delete unused options and expand the chosen structure with
+  real paths (e.g., apps/admin, packages/something). The delivered plan must
+  not include Option labels.
+-->
 
 ```text
-lib/
-├── app.dart
-├── main.dart
-├── core/models/
-├── domain/repository/
-├── presentation/
-│   ├── components/
-│   ├── providers/
-│   └── screens/
-│       ├── auth/
-│       ├── challenge/
-│       ├── coordinate/
-│       ├── home/
-│       ├── my_profile/
-│       ├── notifications/
-│       └── shell/
-├── routes/
+# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
+src/
+├── models/
 ├── services/
-└── i18n/
+├── cli/
+└── lib/
 
-assets/i18n/
-test/
+tests/
+├── contract/
+├── integration/
+└── unit/
+
+# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
+backend/
+├── src/
+│   ├── models/
+│   ├── services/
+│   └── api/
+└── tests/
+
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── services/
+└── tests/
+
+# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
+api/
+└── [same as backend above]
+
+ios/ or android/
+└── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**Structure Decision**: Keep a single Flutter app structure. Add auth-specific
-screen and session state under `lib/presentation/screens/auth/` plus any
-session/auth providers under existing `presentation/providers` or adjacent
-screen view-model files. Router changes stay in `lib/routes/`. Supabase auth
-integration stays in `lib/services/`.
+**Structure Decision**: [Document the selected structure and reference the real
+directories captured above]
 
 ## Complexity Tracking
 
-No constitution violations currently require justification.
+> **Fill ONLY if Constitution Check has violations that must be justified**
+
+| Violation | Why Needed | Simpler Alternative Rejected Because |
+|-----------|------------|-------------------------------------|
+| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |

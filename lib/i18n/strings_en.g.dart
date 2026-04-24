@@ -365,11 +365,104 @@ class TranslationsMyPageEn {
 	/// en: 'My page'
 	String get title => 'My page';
 
-	/// en: 'This protected profile area will surface account details, creator identity, and activity snapshots.'
-	String get description => 'This protected profile area will surface account details, creator identity, and activity snapshots.';
+	/// en: 'Your profile, statistics, balance, and generated gallery in one place.'
+	String get description => 'Your profile, statistics, balance, and generated gallery in one place.';
 
 	/// en: 'Account space'
 	String get badge => 'Account space';
+
+	/// en: 'Creator'
+	String get default_display_name => 'Creator';
+
+	/// en: 'No profile bio yet.'
+	String get default_bio => 'No profile bio yet.';
+
+	/// en: 'Unable to load My Page'
+	String get error_title => 'Unable to load My Page';
+
+	/// en: 'Some sections could not be loaded. Please try again.'
+	String get error_body => 'Some sections could not be loaded. Please try again.';
+
+	/// en: 'Unable to load profile'
+	String get profile_error_title => 'Unable to load profile';
+
+	/// en: 'Profile details are currently unavailable.'
+	String get profile_error_body => 'Profile details are currently unavailable.';
+
+	/// en: 'Profile may be outdated'
+	String get profile_partial_error_title => 'Profile may be outdated';
+
+	/// en: 'Some profile data is unavailable. Pull to refresh and try again.'
+	String get profile_partial_error_body => 'Some profile data is unavailable. Pull to refresh and try again.';
+
+	/// en: 'Statistics'
+	String get stats_title => 'Statistics';
+
+	/// en: 'Generated'
+	String get stats_generated => 'Generated';
+
+	/// en: 'Posted'
+	String get stats_posted => 'Posted';
+
+	/// en: 'Likes'
+	String get stats_likes => 'Likes';
+
+	/// en: 'Views'
+	String get stats_views => 'Views';
+
+	/// en: 'Followers'
+	String get stats_followers => 'Followers';
+
+	/// en: 'Following'
+	String get stats_following => 'Following';
+
+	/// en: 'Unable to load statistics'
+	String get stats_error_title => 'Unable to load statistics';
+
+	/// en: 'Your latest statistics are unavailable right now.'
+	String get stats_error_body => 'Your latest statistics are unavailable right now.';
+
+	/// en: 'Credit Balance'
+	String get balance_title => 'Credit Balance';
+
+	/// en: 'percoins'
+	String get balance_unit => 'percoins';
+
+	/// en: 'Regular'
+	String get balance_regular => 'Regular';
+
+	/// en: 'Paid'
+	String get balance_paid => 'Paid';
+
+	/// en: 'Unlimited bonus'
+	String get balance_unlimited_bonus => 'Unlimited bonus';
+
+	/// en: 'Period-limited'
+	String get balance_period_limited => 'Period-limited';
+
+	/// en: 'Unable to load balance'
+	String get balance_error_title => 'Unable to load balance';
+
+	/// en: 'Credit balance data is unavailable right now.'
+	String get balance_error_body => 'Credit balance data is unavailable right now.';
+
+	/// en: 'Generated images'
+	String get gallery_title => 'Generated images';
+
+	/// en: 'No caption or prompt preview.'
+	String get gallery_missing_preview => 'No caption or prompt preview.';
+
+	/// en: 'No generated images yet'
+	String get gallery_empty_title => 'No generated images yet';
+
+	/// en: 'Create your first image and it will appear here.'
+	String get gallery_empty_body => 'Create your first image and it will appear here.';
+
+	/// en: 'Unable to load gallery'
+	String get gallery_error_title => 'Unable to load gallery';
+
+	/// en: 'Your image gallery is unavailable right now.'
+	String get gallery_error_body => 'Your image gallery is unavailable right now.';
 }
 
 // Path: home.filters
@@ -478,8 +571,39 @@ extension on Translations {
 			'notifications.description' => 'This section will collect alerts, event updates, and collaboration signals in one mobile-first view.',
 			'notifications.badge' => 'Realtime ready',
 			'my_page.title' => 'My page',
-			'my_page.description' => 'This protected profile area will surface account details, creator identity, and activity snapshots.',
+			'my_page.description' => 'Your profile, statistics, balance, and generated gallery in one place.',
 			'my_page.badge' => 'Account space',
+			'my_page.default_display_name' => 'Creator',
+			'my_page.default_bio' => 'No profile bio yet.',
+			'my_page.error_title' => 'Unable to load My Page',
+			'my_page.error_body' => 'Some sections could not be loaded. Please try again.',
+			'my_page.profile_error_title' => 'Unable to load profile',
+			'my_page.profile_error_body' => 'Profile details are currently unavailable.',
+			'my_page.profile_partial_error_title' => 'Profile may be outdated',
+			'my_page.profile_partial_error_body' => 'Some profile data is unavailable. Pull to refresh and try again.',
+			'my_page.stats_title' => 'Statistics',
+			'my_page.stats_generated' => 'Generated',
+			'my_page.stats_posted' => 'Posted',
+			'my_page.stats_likes' => 'Likes',
+			'my_page.stats_views' => 'Views',
+			'my_page.stats_followers' => 'Followers',
+			'my_page.stats_following' => 'Following',
+			'my_page.stats_error_title' => 'Unable to load statistics',
+			'my_page.stats_error_body' => 'Your latest statistics are unavailable right now.',
+			'my_page.balance_title' => 'Credit Balance',
+			'my_page.balance_unit' => 'percoins',
+			'my_page.balance_regular' => 'Regular',
+			'my_page.balance_paid' => 'Paid',
+			'my_page.balance_unlimited_bonus' => 'Unlimited bonus',
+			'my_page.balance_period_limited' => 'Period-limited',
+			'my_page.balance_error_title' => 'Unable to load balance',
+			'my_page.balance_error_body' => 'Credit balance data is unavailable right now.',
+			'my_page.gallery_title' => 'Generated images',
+			'my_page.gallery_missing_preview' => 'No caption or prompt preview.',
+			'my_page.gallery_empty_title' => 'No generated images yet',
+			'my_page.gallery_empty_body' => 'Create your first image and it will appear here.',
+			'my_page.gallery_error_title' => 'Unable to load gallery',
+			'my_page.gallery_error_body' => 'Your image gallery is unavailable right now.',
 			_ => null,
 		};
 	}

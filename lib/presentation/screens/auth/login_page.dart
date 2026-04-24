@@ -198,7 +198,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ProtectedDestination.coordinate => const CoordinateRoute(),
       ProtectedDestination.challenge => const ChallengeRoute(),
       ProtectedDestination.notifications => const NotificationsRoute(),
-      ProtectedDestination.myPage => const MyProfileRoute(),
+      ProtectedDestination.myPage => const MyPageRoute(),
       null => const HomeRoute(),
     };
   }

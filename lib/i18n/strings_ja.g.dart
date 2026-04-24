@@ -207,8 +207,39 @@ class _TranslationsMyPageJa extends TranslationsMyPageEn {
 
 	// Translations
 	@override String get title => 'マイページ';
-	@override String get description => 'このプロフィールエリアでは、アカウント情報、クリエイター情報、アクティビティの概要を表示する予定です。';
+	@override String get description => 'プロフィール、統計、残高、生成ギャラリーを1つの画面で確認できます。';
 	@override String get badge => 'アカウント';
+	@override String get default_display_name => 'Creator';
+	@override String get default_bio => 'プロフィールの自己紹介はまだありません。';
+	@override String get error_title => 'マイページを読み込めませんでした';
+	@override String get error_body => '一部セクションの取得に失敗しました。再試行してください。';
+	@override String get profile_error_title => 'プロフィールを読み込めませんでした';
+	@override String get profile_error_body => '現在プロフィール情報を取得できません。';
+	@override String get profile_partial_error_title => 'プロフィール情報が最新ではない可能性があります';
+	@override String get profile_partial_error_body => '一部プロフィールデータを取得できませんでした。更新して再試行してください。';
+	@override String get stats_title => '統計';
+	@override String get stats_generated => '生成数';
+	@override String get stats_posted => '投稿数';
+	@override String get stats_likes => 'いいね';
+	@override String get stats_views => '閲覧数';
+	@override String get stats_followers => 'フォロワー';
+	@override String get stats_following => 'フォロー中';
+	@override String get stats_error_title => '統計を読み込めませんでした';
+	@override String get stats_error_body => '最新の統計情報を取得できません。';
+	@override String get balance_title => 'クレジット残高';
+	@override String get balance_unit => 'percoins';
+	@override String get balance_regular => '通常';
+	@override String get balance_paid => '有料';
+	@override String get balance_unlimited_bonus => '無期限ボーナス';
+	@override String get balance_period_limited => '期間限定';
+	@override String get balance_error_title => '残高を読み込めませんでした';
+	@override String get balance_error_body => '現在クレジット残高を取得できません。';
+	@override String get gallery_title => '生成画像';
+	@override String get gallery_missing_preview => 'キャプションまたはプロンプトのプレビューはありません。';
+	@override String get gallery_empty_title => '生成画像はまだありません';
+	@override String get gallery_empty_body => '最初の画像を生成するとここに表示されます。';
+	@override String get gallery_error_title => 'ギャラリーを読み込めませんでした';
+	@override String get gallery_error_body => '現在ギャラリー情報を取得できません。';
 }
 
 // Path: home.filters
@@ -311,8 +342,39 @@ extension on TranslationsJa {
 			'notifications.description' => 'このセクションには、アラート、イベント更新、共同作業シグナルがモバイルファーストの1画面に集約されます。',
 			'notifications.badge' => 'リアルタイム対応',
 			'my_page.title' => 'マイページ',
-			'my_page.description' => 'このプロフィールエリアでは、アカウント情報、クリエイター情報、アクティビティの概要を表示する予定です。',
+			'my_page.description' => 'プロフィール、統計、残高、生成ギャラリーを1つの画面で確認できます。',
 			'my_page.badge' => 'アカウント',
+			'my_page.default_display_name' => 'Creator',
+			'my_page.default_bio' => 'プロフィールの自己紹介はまだありません。',
+			'my_page.error_title' => 'マイページを読み込めませんでした',
+			'my_page.error_body' => '一部セクションの取得に失敗しました。再試行してください。',
+			'my_page.profile_error_title' => 'プロフィールを読み込めませんでした',
+			'my_page.profile_error_body' => '現在プロフィール情報を取得できません。',
+			'my_page.profile_partial_error_title' => 'プロフィール情報が最新ではない可能性があります',
+			'my_page.profile_partial_error_body' => '一部プロフィールデータを取得できませんでした。更新して再試行してください。',
+			'my_page.stats_title' => '統計',
+			'my_page.stats_generated' => '生成数',
+			'my_page.stats_posted' => '投稿数',
+			'my_page.stats_likes' => 'いいね',
+			'my_page.stats_views' => '閲覧数',
+			'my_page.stats_followers' => 'フォロワー',
+			'my_page.stats_following' => 'フォロー中',
+			'my_page.stats_error_title' => '統計を読み込めませんでした',
+			'my_page.stats_error_body' => '最新の統計情報を取得できません。',
+			'my_page.balance_title' => 'クレジット残高',
+			'my_page.balance_unit' => 'percoins',
+			'my_page.balance_regular' => '通常',
+			'my_page.balance_paid' => '有料',
+			'my_page.balance_unlimited_bonus' => '無期限ボーナス',
+			'my_page.balance_period_limited' => '期間限定',
+			'my_page.balance_error_title' => '残高を読み込めませんでした',
+			'my_page.balance_error_body' => '現在クレジット残高を取得できません。',
+			'my_page.gallery_title' => '生成画像',
+			'my_page.gallery_missing_preview' => 'キャプションまたはプロンプトのプレビューはありません。',
+			'my_page.gallery_empty_title' => '生成画像はまだありません',
+			'my_page.gallery_empty_body' => '最初の画像を生成するとここに表示されます。',
+			'my_page.gallery_error_title' => 'ギャラリーを読み込めませんでした',
+			'my_page.gallery_error_body' => '現在ギャラリー情報を取得できません。',
 			_ => null,
 		};
 	}
