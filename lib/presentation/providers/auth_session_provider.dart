@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../data/repositories/supabase_auth_repository.dart';
 import '../../core/models/auth_session.dart';
 import '../../domain/repository/auth_repository.dart';
-import '../../services/supabase_auth_repository.dart';
 import '../../services/supabase_service.dart';
 
 enum ProtectedDestination { coordinate, challenge, notifications, myPage }

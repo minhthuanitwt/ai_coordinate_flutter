@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../core/models/auth_session.dart';
-import '../domain/repository/auth_repository.dart';
-import 'local_storage_service.dart';
-import 'supabase_service.dart';
+import '../../core/models/auth_session.dart';
+import '../../domain/repository/auth_repository.dart';
+import '../../services/local_storage_service.dart';
+import '../../services/supabase_service.dart';
 
 class SupabaseAuthRepository implements AuthRepository {
   SupabaseAuthRepository({required SupabaseService service}) : _service = service;

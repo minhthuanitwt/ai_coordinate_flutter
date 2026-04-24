@@ -1,16 +1,17 @@
-import '../core/models/my_page_balance.dart';
-import '../core/models/my_page_image_item.dart';
-import '../core/models/my_page_profile.dart';
-import '../core/models/my_page_stats.dart';
-import '../domain/repository/my_page_repository.dart';
-import 'supabase_service.dart';
+import '../../core/models/my_page_balance.dart';
+import '../../core/models/my_page_image_item.dart';
+import '../../core/models/my_page_profile.dart';
+import '../../core/models/my_page_stats.dart';
+import '../../domain/failures/my_page_repository_failure.dart';
+import '../../domain/repository/my_page_repository.dart';
+import '../../services/supabase_service.dart';
 
 class SupabaseMyPageRepository implements MyPageRepository {
   @override
   Future<MyPageProfile> getMyProfile({required String userId}) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const MyPageRepositoryException('supabase_not_configured');
+      throw const MyPageRepositoryFailure('supabase_not_configured');
     }
 
     try {
@@ -33,7 +34,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
         subscriptionPlan: row['subscription_plan'] as String?,
       );
     } catch (_) {
-      throw const MyPageRepositoryException('unknown_error');
+      throw const MyPageRepositoryFailure('unknown_error');
     }
   }
 
@@ -41,7 +42,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
   Future<MyPageStats> getMyStats({required String userId}) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const MyPageRepositoryException('supabase_not_configured');
+      throw const MyPageRepositoryFailure('supabase_not_configured');
     }
 
     try {
@@ -61,7 +62,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
         followingCount: followCounts.followingCount,
       );
     } catch (_) {
-      throw const MyPageRepositoryException('unknown_error');
+      throw const MyPageRepositoryFailure('unknown_error');
     }
   }
 
@@ -69,7 +70,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
   Future<MyPageBalance> getMyBalance({required String userId}) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const MyPageRepositoryException('supabase_not_configured');
+      throw const MyPageRepositoryFailure('supabase_not_configured');
     }
 
     try {
@@ -90,7 +91,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
         periodLimited: 0,
       );
     } catch (_) {
-      throw const MyPageRepositoryException('unknown_error');
+      throw const MyPageRepositoryFailure('unknown_error');
     }
   }
 
@@ -102,7 +103,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
   }) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const MyPageRepositoryException('supabase_not_configured');
+      throw const MyPageRepositoryFailure('supabase_not_configured');
     }
 
     try {
@@ -134,7 +135,7 @@ class SupabaseMyPageRepository implements MyPageRepository {
           .where((item) => item.id.isNotEmpty && item.imageUrl.isNotEmpty)
           .toList();
     } catch (_) {
-      throw const MyPageRepositoryException('unknown_error');
+      throw const MyPageRepositoryFailure('unknown_error');
     }
   }
 
@@ -212,12 +213,6 @@ class SupabaseMyPageRepository implements MyPageRepository {
       return const _FollowCounts(followerCount: 0, followingCount: 0);
     }
   }
-}
-
-class MyPageRepositoryException implements Exception {
-  const MyPageRepositoryException(this.code);
-
-  final String code;
 }
 
 class _FollowCounts {

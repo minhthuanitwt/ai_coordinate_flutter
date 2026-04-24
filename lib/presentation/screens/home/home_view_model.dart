@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../core/models/home_banner_item.dart';
 import '../../../core/models/home_feed_item.dart';
 import '../../providers/auth_session_provider.dart';
+import '../../providers/repository_providers.dart';
 import '../../../domain/repository/home_repository.dart';
-import '../../../services/supabase_home_repository.dart';
 import '../../../services/supabase_service.dart';
 import 'home_state.dart';
 

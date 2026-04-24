@@ -4,9 +4,9 @@ import '../../../core/models/my_page_balance.dart';
 import '../../../core/models/my_page_image_item.dart';
 import '../../../core/models/my_page_profile.dart';
 import '../../../core/models/my_page_stats.dart';
+import '../../../domain/failures/my_page_repository_failure.dart';
 import '../../../presentation/providers/auth_session_provider.dart';
-import '../../../presentation/providers/my_page_provider.dart';
-import '../../../services/supabase_my_page_repository.dart';
+import '../../../presentation/providers/repository_providers.dart';
 import 'my_page_state.dart';
 
 final myPageViewModelProvider =
@@ -98,7 +98,7 @@ class MyPageViewModel extends AutoDisposeNotifier<MyPageState> {
         hasMoreImages: items.length == _pageSize,
         imagesErrorCode: null,
       );
-    } on MyPageRepositoryException catch (error) {
+    } on MyPageRepositoryFailure catch (error) {
       state = state.copyWith(
         isLoadingMoreImages: false,
         imagesErrorCode: error.code,
@@ -136,7 +136,7 @@ class MyPageViewModel extends AutoDisposeNotifier<MyPageState> {
 
     try {
       profile = await ref.read(myPageRepositoryProvider).getMyProfile(userId: userId);
-    } on MyPageRepositoryException catch (error) {
+    } on MyPageRepositoryFailure catch (error) {
       profileErrorCode = error.code;
     } catch (_) {
       profileErrorCode = 'my_page_profile_failed';
@@ -144,7 +144,7 @@ class MyPageViewModel extends AutoDisposeNotifier<MyPageState> {
 
     try {
       stats = await ref.read(myPageRepositoryProvider).getMyStats(userId: userId);
-    } on MyPageRepositoryException catch (error) {
+    } on MyPageRepositoryFailure catch (error) {
       statsErrorCode = error.code;
     } catch (_) {
       statsErrorCode = 'my_page_stats_failed';
@@ -152,7 +152,7 @@ class MyPageViewModel extends AutoDisposeNotifier<MyPageState> {
 
     try {
       balance = await ref.read(myPageRepositoryProvider).getMyBalance(userId: userId);
-    } on MyPageRepositoryException catch (error) {
+    } on MyPageRepositoryFailure catch (error) {
       balanceErrorCode = error.code;
     } catch (_) {
       balanceErrorCode = 'my_page_balance_failed';
@@ -166,7 +166,7 @@ class MyPageViewModel extends AutoDisposeNotifier<MyPageState> {
             offset: resetImages ? 0 : images.length,
             limit: _pageSize,
           );
-    } on MyPageRepositoryException catch (error) {
+    } on MyPageRepositoryFailure catch (error) {
       imagesErrorCode = error.code;
     } catch (_) {
       imagesErrorCode = 'my_page_images_failed';

@@ -1,12 +1,7 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../core/models/coordinate_item.dart';
-import '../domain/repository/coordinate_repository.dart';
-import 'supabase_service.dart';
-
-final coordinateRepositoryProvider = Provider<CoordinateRepository>((ref) {
-  return SupabaseCoordinateRepository();
-});
+import '../../core/models/coordinate_item.dart';
+import '../../domain/failures/coordinate_repository_failure.dart';
+import '../../domain/repository/coordinate_repository.dart';
+import '../../services/supabase_service.dart';
 
 class SupabaseCoordinateRepository implements CoordinateRepository {
   @override
@@ -17,7 +12,7 @@ class SupabaseCoordinateRepository implements CoordinateRepository {
   }) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const CoordinateRepositoryException('supabase_not_configured');
+      throw const CoordinateRepositoryFailure('supabase_not_configured');
     }
 
     final response = await service.client
@@ -51,10 +46,4 @@ class SupabaseCoordinateRepository implements CoordinateRepository {
       sourceImageStockId: row['source_image_stock_id'] as String?,
     );
   }
-}
-
-class CoordinateRepositoryException implements Exception {
-  const CoordinateRepositoryException(this.code);
-
-  final String code;
 }

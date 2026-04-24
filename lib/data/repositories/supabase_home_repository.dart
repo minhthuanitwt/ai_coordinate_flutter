@@ -1,20 +1,15 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../core/models/home_banner_item.dart';
-import '../core/models/home_feed_item.dart';
-import '../domain/repository/home_repository.dart';
-import 'supabase_service.dart';
-
-final homeRepositoryProvider = Provider<HomeRepository>((ref) {
-  return SupabaseHomeRepository();
-});
+import '../../core/models/home_banner_item.dart';
+import '../../core/models/home_feed_item.dart';
+import '../../domain/failures/home_repository_failure.dart';
+import '../../domain/repository/home_repository.dart';
+import '../../services/supabase_service.dart';
 
 class SupabaseHomeRepository implements HomeRepository {
   @override
   Future<List<HomeBannerItem>> listHomeBanners() async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const HomeRepositoryException('supabase_not_configured');
+      throw const HomeRepositoryFailure('supabase_not_configured');
     }
 
     final now = DateTime.now();
@@ -45,7 +40,7 @@ class SupabaseHomeRepository implements HomeRepository {
   }) async {
     final service = SupabaseService.instance;
     if (!service.isConfigured) {
-      throw const HomeRepositoryException('supabase_not_configured');
+      throw const HomeRepositoryFailure('supabase_not_configured');
     }
 
     switch (sort) {
@@ -332,12 +327,6 @@ class SupabaseHomeRepository implements HomeRepository {
     }
     return true;
   }
-}
-
-class HomeRepositoryException implements Exception {
-  const HomeRepositoryException(this.code);
-
-  final String code;
 }
 
 class _ProfileSummary {
