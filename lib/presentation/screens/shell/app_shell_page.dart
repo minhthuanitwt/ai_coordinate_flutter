@@ -71,60 +71,42 @@ class AppShellPage extends ConsumerWidget {
           tabsRouter.setActiveIndex(index);
         }
 
-        final isDesktop = MediaQuery.sizeOf(context).width >= 960;
-
         return Scaffold(
           backgroundColor: AppColors.background,
           body: SafeArea(
-            child: isDesktop
-                ? Row(
-                    children: [
-                      _DesktopSidebar(
-                        items: items,
-                        currentIndex: tabsRouter.activeIndex,
-                        onTap: openIndex,
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            const _ShellHeader(),
-                            _SessionBanner(
-                              isAuthenticated: isAuthenticated,
-                              email: authSession?.email,
-                            ),
-                            Expanded(child: child),
-                            const _ShellFooter(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      const _ShellHeader(),
-                      _SessionBanner(
-                        isAuthenticated: isAuthenticated,
-                        email: authSession?.email,
-                      ),
-                      Expanded(child: child),
-                    ],
-                  ),
-          ),
-          bottomNavigationBar: isDesktop
-              ? null
-              : NavigationBar(
-                  selectedIndex: tabsRouter.activeIndex,
-                  onDestinationSelected: openIndex,
-                  destinations: items
-                      .map(
-                        (item) => NavigationDestination(
-                          icon: Icon(item.icon),
-                          selectedIcon: Icon(item.activeIcon),
-                          label: item.label,
-                        ),
-                      )
-                      .toList(),
+            child: Column(
+              children: [
+                const _ShellHeader(),
+                _SessionBanner(
+                  isAuthenticated: isAuthenticated,
+                  email: authSession?.email,
                 ),
+                Expanded(child: child),
+              ],
+            ),
+          ),
+          bottomNavigationBar: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              labelTextStyle: WidgetStatePropertyAll(
+                Theme.of(
+                  context,
+                ).textTheme.labelSmall?.copyWith(fontSize: 12, height: 1.0),
+              ),
+            ),
+            child: NavigationBar(
+              selectedIndex: tabsRouter.activeIndex,
+              onDestinationSelected: openIndex,
+              destinations: items
+                  .map(
+                    (item) => NavigationDestination(
+                      icon: Icon(item.icon),
+                      selectedIcon: Icon(item.activeIcon),
+                      label: item.label,
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         );
       },
     );
@@ -138,107 +120,6 @@ class AppShellPage extends ConsumerWidget {
       4 => ProtectedDestination.myPage,
       _ => null,
     };
-  }
-}
-
-class _DesktopSidebar extends StatelessWidget {
-  const _DesktopSidebar({
-    required this.items,
-    required this.currentIndex,
-    required this.onTap,
-  });
-
-  final List<_ShellItem> items;
-  final int currentIndex;
-  final ValueChanged<int> onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 268,
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 24),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(right: BorderSide(color: AppColors.border)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            context.t.app_name,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            context.t.shell.subtitle,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-          ),
-          const SizedBox(height: 28),
-          for (var i = 0; i < items.length; i++) ...[
-            _SidebarTile(
-              item: items[i],
-              selected: i == currentIndex,
-              onTap: () => onTap(i),
-            ),
-            const SizedBox(height: 8),
-          ],
-          const Spacer(),
-          Text(
-            context.t.shell.footer_tagline,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SidebarTile extends StatelessWidget {
-  const _SidebarTile({
-    required this.item,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final _ShellItem item;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: selected ? AppColors.softBlue : Colors.transparent,
-      borderRadius: BorderRadius.circular(18),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          child: Row(
-            children: [
-              Icon(
-                selected ? item.activeIcon : item.icon,
-                color: selected ? AppColors.primary : AppColors.textMuted,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  item.label,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: selected ? AppColors.primary : AppColors.textPrimary,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
 
@@ -318,23 +199,6 @@ class _SessionBanner extends StatelessWidget {
         style: Theme.of(
           context,
         ).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-      ),
-    );
-  }
-}
-
-class _ShellFooter extends StatelessWidget {
-  const _ShellFooter();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 18),
-      child: Text(
-        context.t.shell.footer_tagline,
-        style: Theme.of(
-          context,
-        ).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
       ),
     );
   }
