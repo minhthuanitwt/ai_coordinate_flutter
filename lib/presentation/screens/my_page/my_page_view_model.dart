@@ -1,9 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/models/my_page_balance.dart';
-import '../../../core/models/my_page_image_item.dart';
-import '../../../core/models/my_page_profile.dart';
-import '../../../core/models/my_page_stats.dart';
+import '../../../domain/models/my_page_balance.dart';
+import '../../../domain/models/my_page_image_item.dart';
+import '../../../domain/models/my_page_profile.dart';
+import '../../../domain/models/my_page_stats.dart';
 import '../../../domain/failures/my_page_repository_failure.dart';
 import '../../../domain/repository/my_page_repository.dart';
 import '../../../presentation/providers/auth_session_provider.dart';

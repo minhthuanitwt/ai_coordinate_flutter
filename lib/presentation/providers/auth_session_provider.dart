@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/models/auth_session.dart';
+import '../../domain/models/auth_session.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../services/supabase_service.dart';
 

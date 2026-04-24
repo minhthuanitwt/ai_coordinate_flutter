@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/models/home_banner_item.dart';
-import '../../../core/models/home_feed_item.dart';
+import '../../../domain/models/home_banner_item.dart';
+import '../../../domain/models/home_feed_item.dart';
 import '../../../services/supabase_service.dart';
 
 part 'home_state.freezed.dart';

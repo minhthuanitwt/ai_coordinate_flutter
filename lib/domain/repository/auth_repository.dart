@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../core/models/auth_session.dart';
+import '../../domain/models/auth_session.dart';
 import '../../services/local_storage_service.dart';
 import '../../services/supabase_service.dart';
 

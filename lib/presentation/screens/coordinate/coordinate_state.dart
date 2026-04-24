@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/models/coordinate_item.dart';
+import '../../../domain/models/coordinate_item.dart';
 import '../../../services/supabase_service.dart';
 
 part 'coordinate_state.freezed.dart';

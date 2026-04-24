@@ -2,10 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/models/my_page_balance.dart';
-import '../../../core/models/my_page_image_item.dart';
-import '../../../core/models/my_page_profile.dart';
-import '../../../core/models/my_page_stats.dart';
+import '../../../domain/models/my_page_balance.dart';
+import '../../../domain/models/my_page_image_item.dart';
+import '../../../domain/models/my_page_profile.dart';
+import '../../../domain/models/my_page_stats.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../themes/app_colors.dart';
 import 'my_page_view_model.dart';

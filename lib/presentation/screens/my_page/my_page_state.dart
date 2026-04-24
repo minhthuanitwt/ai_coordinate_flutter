@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/models/my_page_balance.dart';
-import '../../../core/models/my_page_image_item.dart';
-import '../../../core/models/my_page_profile.dart';
-import '../../../core/models/my_page_stats.dart';
+import '../../../domain/models/my_page_balance.dart';
+import '../../../domain/models/my_page_image_item.dart';
+import '../../../domain/models/my_page_profile.dart';
+import '../../../domain/models/my_page_stats.dart';
 import '../../../services/supabase_service.dart';
 
 part 'my_page_state.freezed.dart';

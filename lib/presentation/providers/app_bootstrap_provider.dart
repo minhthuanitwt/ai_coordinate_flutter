@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/models/bootstrap_status.dart';
+import '../../domain/models/bootstrap_status.dart';
 import '../../services/local_storage_service.dart';
 import '../../services/supabase_service.dart';
 

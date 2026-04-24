@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/models/auth_session.dart';
+import '../../../domain/models/auth_session.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../presentation/providers/auth_session_provider.dart';
 import '../../../routes/app_router.dart';

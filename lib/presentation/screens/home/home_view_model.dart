@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../core/models/home_banner_item.dart';
-import '../../../core/models/home_feed_item.dart';
+import '../../../domain/models/home_banner_item.dart';
+import '../../../domain/models/home_feed_item.dart';
 import '../../../domain/repository/home_repository.dart';
 import '../../providers/auth_session_provider.dart';
 import '../../../services/supabase_service.dart';

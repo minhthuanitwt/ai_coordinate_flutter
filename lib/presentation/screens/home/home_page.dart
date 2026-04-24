@@ -4,8 +4,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../core/models/home_banner_item.dart';
-import '../../../core/models/home_feed_item.dart';
+import '../../../domain/models/home_banner_item.dart';
+import '../../../domain/models/home_feed_item.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../themes/app_colors.dart';
 import 'home_state.dart';

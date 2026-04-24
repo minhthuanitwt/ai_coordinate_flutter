@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../core/models/coordinate_item.dart';
+import '../../domain/models/coordinate_item.dart';
 import '../failures/coordinate_repository_failure.dart';
 import '../../services/supabase_service.dart';
 
