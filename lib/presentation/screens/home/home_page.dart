@@ -560,27 +560,28 @@ class _FeedCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(8),
         child: Ink(
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(18),
+                  top: Radius.circular(8),
                 ),
-                child: AspectRatio(
-                  aspectRatio: _imageAspectRatio(item.id),
-                  child: Image.network(
-                    item.imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const ColoredBox(
-                          color: AppColors.softBlue,
+                child: Image.network(
+                  item.imageUrl,
+                  width: double.infinity,
+                  fit: BoxFit.fitWidth,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const ColoredBox(
+                        color: AppColors.softBlue,
+                        child: SizedBox(
+                          height: 180,
                           child: Center(
                             child: Icon(
                               Icons.image_not_supported_outlined,
@@ -589,11 +590,11 @@ class _FeedCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                  ),
+                      ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
+                padding: const EdgeInsets.fromLTRB(6, 6, 6, 7),
                 child: Row(
                   children: [
                     _AvatarBadge(
@@ -606,7 +607,7 @@ class _FeedCard extends StatelessWidget {
                                 .toUpperCase()
                           : t.default_user_label.characters.first.toUpperCase(),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 6),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -620,7 +621,7 @@ class _FeedCard extends StatelessWidget {
                             style: Theme.of(context).textTheme.titleSmall
                                 ?.copyWith(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 12,
+                                  fontSize: 11,
                                   height: 1.1,
                                 ),
                           ),
@@ -642,18 +643,6 @@ class _FeedCard extends StatelessWidget {
     );
   }
 
-  double _imageAspectRatio(String seed) {
-    // Deterministic variation for Pinterest-like staggered rows.
-    final variant = seed.hashCode.abs() % 3;
-    switch (variant) {
-      case 0:
-        return 0.78;
-      case 1:
-        return 1.0;
-      default:
-        return 1.24;
-    }
-  }
 }
 
 class _AvatarBadge extends StatelessWidget {
@@ -670,8 +659,8 @@ class _AvatarBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         child: Image.network(
           trimmedUrl,
-          width: 36,
-          height: 36,
+          width: 20,
+          height: 20,
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) =>
               _FallbackAvatar(fallback: fallback),
@@ -691,8 +680,8 @@ class _FallbackAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 36,
-      height: 36,
+      width: 20,
+      height: 20,
       decoration: BoxDecoration(
         color: AppColors.softBlue,
         borderRadius: BorderRadius.circular(999),
@@ -703,7 +692,7 @@ class _FallbackAvatar extends StatelessWidget {
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
           color: AppColors.primary,
           fontWeight: FontWeight.w800,
-          fontSize: 11,
+          fontSize: 9,
         ),
       ),
     );
@@ -719,7 +708,7 @@ class _MetricChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.softBlue,
         borderRadius: BorderRadius.circular(999),
@@ -727,14 +716,14 @@ class _MetricChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppColors.primary),
-          const SizedBox(width: 4),
+          Icon(icon, size: 12, color: AppColors.primary),
+          const SizedBox(width: 3),
           Text(
             value,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
-              fontSize: 11,
+              fontSize: 10,
             ),
           ),
         ],

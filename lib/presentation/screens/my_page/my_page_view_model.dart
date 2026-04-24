@@ -5,8 +5,8 @@ import '../../../core/models/my_page_image_item.dart';
 import '../../../core/models/my_page_profile.dart';
 import '../../../core/models/my_page_stats.dart';
 import '../../../domain/failures/my_page_repository_failure.dart';
+import '../../../domain/repository/my_page_repository.dart';
 import '../../../presentation/providers/auth_session_provider.dart';
-import '../../../presentation/providers/repository_providers.dart';
 import 'my_page_state.dart';
 
 final myPageViewModelProvider =
