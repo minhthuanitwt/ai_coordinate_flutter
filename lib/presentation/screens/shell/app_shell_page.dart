@@ -36,11 +36,11 @@ class AppShellPage extends ConsumerWidget {
           ),
           _ShellItem(
             label: t.nav.coordinate,
-            icon: Icons.hub_outlined,
+            icon: Icons.auto_awesome_outlined,
             activeIcon: Icons.hub,
           ),
           _ShellItem(
-            label: t.nav.challenge,
+            label: t.nav.mission,
             icon: Icons.auto_awesome_outlined,
             activeIcon: Icons.auto_awesome,
           ),

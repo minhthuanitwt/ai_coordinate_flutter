@@ -78,8 +78,8 @@ class _TranslationsNavJa extends TranslationsNavEn {
 	// Translations
 	@override String get home => 'ホーム';
 	@override String get coordinate => 'コーディネート';
-	@override String get challenge => 'チャレンジ';
-	@override String get notifications => '通知';
+	@override String get mission => 'ミッション\n';
+	@override String get notifications => 'お知らせ\n\n';
 	@override String get my_page => 'マイページ';
 }
 
@@ -274,8 +274,8 @@ extension on TranslationsJa {
 			'shell.member_badge' => 'ログイン中',
 			'nav.home' => 'ホーム',
 			'nav.coordinate' => 'コーディネート',
-			'nav.challenge' => 'チャレンジ',
-			'nav.notifications' => '通知',
+			'nav.mission' => 'ミッション\n',
+			'nav.notifications' => 'お知らせ\n\n',
 			'nav.my_page' => 'マイページ',
 			'home.headline' => 'Persta | ペルスタ\n',
 			'home.lead' => '着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n',

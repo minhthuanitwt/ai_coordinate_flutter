@@ -105,8 +105,8 @@ class TranslationsNavEn {
 	/// en: 'Coordinate'
 	String get coordinate => 'Coordinate';
 
-	/// en: 'Challenge'
-	String get challenge => 'Challenge';
+	/// en: 'Mission'
+	String get mission => 'Mission';
 
 	/// en: 'Notifications'
 	String get notifications => 'Notifications';
@@ -503,7 +503,7 @@ extension on Translations {
 			'shell.member_badge' => 'Signed in',
 			'nav.home' => 'Home',
 			'nav.coordinate' => 'Coordinate',
-			'nav.challenge' => 'Challenge',
+			'nav.mission' => 'Mission',
 			'nav.notifications' => 'Notifications',
 			'nav.my_page' => 'My Page',
 			'home.headline' => 'Persta',

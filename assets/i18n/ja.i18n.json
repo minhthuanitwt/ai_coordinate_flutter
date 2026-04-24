@@ -14,8 +14,8 @@
   "nav": {
     "home": "ホーム",
     "coordinate": "コーディネート",
-    "challenge": "チャレンジ",
-    "notifications": "通知",
+    "mission": "ミッション\n",
+    "notifications": "お知らせ\n\n",
     "myPage": "マイページ"
   },
   "home": {
