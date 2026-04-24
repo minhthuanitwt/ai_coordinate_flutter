@@ -39,7 +39,7 @@ class TranslationsVi extends Translations with BaseTranslations<AppLocale, Trans
 	TranslationsVi $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsVi(meta: meta ?? this.$meta);
 
 	// Translations
-	@override String get app_name => 'ai_coordinate_flutter';
+	@override String get app_name => 'Persta.AI';
 	@override String get loading => 'Dang tai';
 	@override String get default_user_label => 'creator';
 	@override late final _TranslationsShellVi shell = _TranslationsShellVi._(_root);
@@ -60,7 +60,7 @@ class _TranslationsShellVi extends TranslationsShellEn {
 
 	// Translations
 	@override String get subtitle => 'Dieu phoi workflow AI trong mot ung dung gon nhe duy nhat.';
-	@override String get header_title => 'Hom nay tren ai_coordinate_flutter';
+	@override String get header_title => 'Hom nay tren Persta.AI';
 	@override String get footer_tagline => 'Flutter shell phase 1 duoc port theo app Next.js tham chieu.';
 }
 
@@ -189,11 +189,11 @@ class _TranslationsMyPageVi extends TranslationsMyPageEn {
 extension on TranslationsVi {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
-			'app_name' => 'ai_coordinate_flutter',
+			'app_name' => 'Persta.AI',
 			'loading' => 'Dang tai',
 			'default_user_label' => 'creator',
 			'shell.subtitle' => 'Dieu phoi workflow AI trong mot ung dung gon nhe duy nhat.',
-			'shell.header_title' => 'Hom nay tren ai_coordinate_flutter',
+			'shell.header_title' => 'Hom nay tren Persta.AI',
 			'shell.footer_tagline' => 'Flutter shell phase 1 duoc port theo app Next.js tham chieu.',
 			'nav.home' => 'Home',
 			'nav.coordinate' => 'Coordinate',

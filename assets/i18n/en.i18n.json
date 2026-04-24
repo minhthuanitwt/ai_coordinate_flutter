@@ -1,10 +1,10 @@
 {
-  "appName": "ai_coordinate_flutter",
+  "appName": "Persta.AI",
   "loading": "Loading",
   "defaultUserLabel": "creator",
   "shell": {
     "subtitle": "Coordinate your AI workflow across one lightweight app.",
-    "headerTitle": "Today on ai_coordinate_flutter",
+    "headerTitle": "Today on Persta.AI",
     "footerTagline": "Phase-1 Flutter shell mirrored from the reference Next.js product."
   },
   "nav": {

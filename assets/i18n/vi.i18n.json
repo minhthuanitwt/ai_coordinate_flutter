@@ -1,10 +1,10 @@
 {
-  "appName": "ai_coordinate_flutter",
+  "appName": "Persta.AI",
   "loading": "Dang tai",
   "defaultUserLabel": "creator",
   "shell": {
     "subtitle": "Dieu phoi workflow AI trong mot ung dung gon nhe duy nhat.",
-    "headerTitle": "Hom nay tren ai_coordinate_flutter",
+    "headerTitle": "Hom nay tren Persta.AI",
     "footerTagline": "Flutter shell phase 1 duoc port theo app Next.js tham chieu."
   },
   "nav": {

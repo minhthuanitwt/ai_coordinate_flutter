@@ -41,8 +41,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 
-	/// en: 'ai_coordinate_flutter'
-	String get app_name => 'ai_coordinate_flutter';
+	/// en: 'Persta.AI'
+	String get app_name => 'Persta.AI';
 
 	/// en: 'Loading'
 	String get loading => 'Loading';
@@ -71,8 +71,8 @@ class TranslationsShellEn {
 	/// en: 'Coordinate your AI workflow across one lightweight app.'
 	String get subtitle => 'Coordinate your AI workflow across one lightweight app.';
 
-	/// en: 'Today on ai_coordinate_flutter'
-	String get header_title => 'Today on ai_coordinate_flutter';
+	/// en: 'Today on Persta.AI'
+	String get header_title => 'Today on Persta.AI';
 
 	/// en: 'Phase-1 Flutter shell mirrored from the reference Next.js product.'
 	String get footer_tagline => 'Phase-1 Flutter shell mirrored from the reference Next.js product.';
@@ -311,11 +311,11 @@ class TranslationsMyPageEn {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
-			'app_name' => 'ai_coordinate_flutter',
+			'app_name' => 'Persta.AI',
 			'loading' => 'Loading',
 			'default_user_label' => 'creator',
 			'shell.subtitle' => 'Coordinate your AI workflow across one lightweight app.',
-			'shell.header_title' => 'Today on ai_coordinate_flutter',
+			'shell.header_title' => 'Today on Persta.AI',
 			'shell.footer_tagline' => 'Phase-1 Flutter shell mirrored from the reference Next.js product.',
 			'nav.home' => 'Home',
 			'nav.coordinate' => 'Coordinate',
