@@ -21,6 +21,11 @@
   "home": {
     "headline": "Persta | ペルスタ\n",
     "lead": "着てみたいも、なりたいも。AIスタイリングプラットフォーム\n\n",
+    "appbar": {
+      "searchPlaceholder": "プロンプトを検索",
+      "localeAction": "言語を変更",
+      "profileAction": "プロフィールを開く"
+    },
     "feedTitle": "最新アップデート",
     "filters": {
       "newest": "新着順",
@@ -99,6 +104,18 @@
   "myPage": {
     "title": "マイページ",
     "description": "プロフィール、統計、残高、生成ギャラリーを1つの画面で確認できます。",
+    "appbar": {
+      "menuAction": "メニューを開く"
+    },
+    "drawer": {
+      "title": "メニュー",
+      "accountAction": "アカウント",
+      "languageSettingsAction": "言語設定",
+      "contactAction": "お問い合わせ",
+      "buyPercoinsAction": "Percoinsを購入",
+      "logoutAction": "ログアウト",
+      "closeAction": "メニューを閉じる"
+    },
     "badge": "アカウント",
     "defaultDisplayName": "Creator",
     "defaultBio": "プロフィールの自己紹介はまだありません。",

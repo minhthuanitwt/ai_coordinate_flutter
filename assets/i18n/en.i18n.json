@@ -21,6 +21,11 @@
   "home": {
     "headline": "Persta",
     "lead": "An AI styling platform for the looks and characters you want to create.\n\n",
+    "appbar": {
+      "searchPlaceholder": "Search prompts",
+      "localeAction": "Change language",
+      "profileAction": "Open profile"
+    },
     "feedTitle": "Latest updates",
     "filters": {
       "newest": "Newest",
@@ -99,6 +104,18 @@
   "myPage": {
     "title": "My page",
     "description": "Your profile, statistics, balance, and generated gallery in one place.",
+    "appbar": {
+      "menuAction": "Open menu"
+    },
+    "drawer": {
+      "title": "Menu",
+      "accountAction": "Account",
+      "languageSettingsAction": "Language settings",
+      "contactAction": "Contact",
+      "buyPercoinsAction": "Buy Percoins",
+      "logoutAction": "Log out",
+      "closeAction": "Close menu"
+    },
     "badge": "Account space",
     "defaultDisplayName": "Creator",
     "defaultBio": "No profile bio yet.",

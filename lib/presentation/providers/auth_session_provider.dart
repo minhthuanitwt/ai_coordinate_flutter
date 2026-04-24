@@ -28,6 +28,10 @@ final isAuthenticatedProvider = Provider<bool>((ref) {
   return session?.isAuthenticated ?? false;
 });
 
+final canViewProtectedUiProvider = Provider<bool>((ref) {
+  return ref.watch(isAuthenticatedProvider);
+});
+
 final authRedirectTargetProvider = StateProvider<ProtectedDestination?>(
   (ref) => null,
 );
