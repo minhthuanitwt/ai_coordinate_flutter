@@ -27,6 +27,7 @@ class AppShellPage extends ConsumerWidget {
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);
+        final showTopAuthHeader = tabsRouter.activeIndex == 4;
         final items = [
           _ShellItem(
             label: t.nav.home,
@@ -76,11 +77,13 @@ class AppShellPage extends ConsumerWidget {
           body: SafeArea(
             child: Column(
               children: [
-                const _ShellHeader(),
-                _SessionBanner(
-                  isAuthenticated: isAuthenticated,
-                  email: authSession?.email,
-                ),
+                if (showTopAuthHeader) ...[
+                  const _ShellHeader(),
+                  _SessionBanner(
+                    isAuthenticated: isAuthenticated,
+                    email: authSession?.email,
+                  ),
+                ],
                 Expanded(child: child),
               ],
             ),

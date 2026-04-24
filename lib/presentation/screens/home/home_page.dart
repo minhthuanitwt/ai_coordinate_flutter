@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -156,7 +157,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                         children: [
                           _FeedFilterChip(
                             label: t.home.filters.newest,
-                            selected: state.currentFilter == HomeFeedFilter.newest,
+                            selected:
+                                state.currentFilter == HomeFeedFilter.newest,
                             onTap: () {
                               ref
                                   .read(homeViewModelProvider.notifier)
@@ -165,7 +167,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ),
                           _FeedFilterChip(
                             label: t.home.filters.recommended,
-                            selected: state.currentFilter == HomeFeedFilter.recommended,
+                            selected:
+                                state.currentFilter ==
+                                HomeFeedFilter.recommended,
                             onTap: () {
                               ref
                                   .read(homeViewModelProvider.notifier)
@@ -174,7 +178,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                           ),
                           _FeedFilterChip(
                             label: t.home.filters.following,
-                            selected: state.currentFilter == HomeFeedFilter.following,
+                            selected:
+                                state.currentFilter == HomeFeedFilter.following,
                             onTap: () {
                               ref
                                   .read(homeViewModelProvider.notifier)
@@ -198,29 +203,16 @@ class _HomePageState extends ConsumerState<HomePage> {
             else if (!state.isEmpty)
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
-                sliver: SliverLayoutBuilder(
-                  builder: (context, constraints) {
-                    final width = constraints.crossAxisExtent;
-                    final columns = width >= 1100
-                        ? 3
-                        : width >= 700
-                        ? 2
-                        : 1;
-                    return SliverGrid.builder(
-                      itemCount: feedItems.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        mainAxisExtent: columns == 1 ? 420 : 388,
-                      ),
-                      itemBuilder: (context, index) {
-                        final item = feedItems[index];
-                        return _FeedCard(
-                          item: item,
-                          onTap: () => _showFeedDetails(item),
-                        );
-                      },
+                sliver: SliverMasonryGrid.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  childCount: feedItems.length,
+                  itemBuilder: (context, index) {
+                    final item = feedItems[index];
+                    return _FeedCard(
+                      item: item,
+                      onTap: () => _showFeedDetails(item),
                     );
                   },
                 ),
@@ -563,51 +555,46 @@ class _FeedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.t;
-    final previewText = item.previewText.isEmpty
-        ? t.home.feed_missing_preview
-        : item.previewText;
 
     return Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(26),
+        borderRadius: BorderRadius.circular(18),
         child: Ink(
           decoration: BoxDecoration(
             color: AppColors.surface,
-            borderRadius: BorderRadius.circular(26),
-            border: Border.all(color: AppColors.border),
+            borderRadius: BorderRadius.circular(18),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(14),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Image.network(
-                        item.imageUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const ColoredBox(
-                              color: AppColors.softBlue,
-                              child: Center(
-                                child: Icon(
-                                  Icons.image_not_supported_outlined,
-                                  color: AppColors.primary,
-                                  size: 38,
-                                ),
-                              ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(18),
+                ),
+                child: AspectRatio(
+                  aspectRatio: _imageAspectRatio(item.id),
+                  child: Image.network(
+                    item.imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const ColoredBox(
+                          color: AppColors.softBlue,
+                          child: Center(
+                            child: Icon(
+                              Icons.image_not_supported_outlined,
+                              color: AppColors.primary,
+                              size: 38,
                             ),
-                      ),
-                    ),
+                          ),
+                        ),
                   ),
                 ),
-                const SizedBox(height: 14),
-                Row(
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
+                child: Row(
                   children: [
                     _AvatarBadge(
                       imageUrl: item.creatorAvatarUrl,
@@ -631,13 +618,11 @@ class _FeedCard extends StatelessWidget {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.titleSmall
-                                ?.copyWith(fontWeight: FontWeight.w700),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            _formatDate(item.postedAt),
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(color: AppColors.textMuted),
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 12,
+                                  height: 1.1,
+                                ),
                           ),
                         ],
                       ),
@@ -649,28 +634,25 @@ class _FeedCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  previewText,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.textPrimary,
-                    height: 1.4,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 
-  String _formatDate(DateTime value) {
-    final month = value.month.toString().padLeft(2, '0');
-    final day = value.day.toString().padLeft(2, '0');
-    return '${value.year}-$month-$day';
+  double _imageAspectRatio(String seed) {
+    // Deterministic variation for Pinterest-like staggered rows.
+    final variant = seed.hashCode.abs() % 3;
+    switch (variant) {
+      case 0:
+        return 0.78;
+      case 1:
+        return 1.0;
+      default:
+        return 1.24;
+    }
   }
 }
 
@@ -721,6 +703,7 @@ class _FallbackAvatar extends StatelessWidget {
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
           color: AppColors.primary,
           fontWeight: FontWeight.w800,
+          fontSize: 11,
         ),
       ),
     );
@@ -751,6 +734,7 @@ class _MetricChip extends StatelessWidget {
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
+              fontSize: 11,
             ),
           ),
         ],
