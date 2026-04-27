@@ -117,7 +117,7 @@ class _CoordinatePageState extends ConsumerState<CoordinatePage> {
                   onBackgroundModeChanged: vm.updateBackgroundMode,
                   onModelTierChanged: vm.updateModelTier,
                   onOutputCountChanged: vm.updateOutputCount,
-                  onSelectMockUpload: vm.setMockUpload,
+                  onSelectUploadFromLibrary: vm.setUploadFromLibrary,
                   onSelectStock: vm.setStockSelection,
                   onSubmit: vm.submitGeneration,
                 ),

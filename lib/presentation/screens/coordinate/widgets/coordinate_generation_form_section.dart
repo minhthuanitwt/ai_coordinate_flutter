@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../domain/models/coordinate_generation_request.dart';
 import '../../../../domain/models/coordinate_source_image_input.dart';
@@ -14,7 +17,7 @@ class CoordinateGenerationFormSection extends StatelessWidget {
     required this.onBackgroundModeChanged,
     required this.onModelTierChanged,
     required this.onOutputCountChanged,
-    required this.onSelectMockUpload,
+    required this.onSelectUploadFromLibrary,
     required this.onSelectStock,
     required this.onSubmit,
     super.key,
@@ -27,12 +30,12 @@ class CoordinateGenerationFormSection extends StatelessWidget {
   final ValueChanged<CoordinateBackgroundMode> onBackgroundModeChanged;
   final ValueChanged<CoordinateModelTier> onModelTierChanged;
   final ValueChanged<int> onOutputCountChanged;
-  final void Function({
+  final Future<void> Function({
     required String fileName,
     required String mimeType,
     required int sizeBytes,
   })
-  onSelectMockUpload;
+  onSelectUploadFromLibrary;
   final void Function({required String stockId, String? previewUrl})
   onSelectStock;
   final VoidCallback onSubmit;
@@ -72,8 +75,8 @@ class CoordinateGenerationFormSection extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             if (state.sourceMode == CoordinateImageSourceMode.upload)
-              _UploadMockSelector(
-                onSelectMockUpload: onSelectMockUpload,
+              _UploadLibrarySelector(
+                onSelectUploadFromLibrary: onSelectUploadFromLibrary,
                 selectedFileName: state.sourceInput.uploadFileName,
                 selectedMeta:
                     '${state.sourceInput.uploadMimeType ?? '-'} | ${(state.sourceInput.uploadSizeBytes ?? 0) ~/ 1024}KB',
@@ -102,120 +105,186 @@ class CoordinateGenerationFormSection extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<CoordinateSourceImageType>(
-                    initialValue: state.sourceImageType,
-                    decoration: InputDecoration(
-                      labelText: t.coordinate.source_type_label,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final compact = constraints.maxWidth < 560;
+                final sourceTypeField =
+                    DropdownButtonFormField<CoordinateSourceImageType>(
+                      isExpanded: true,
+                      initialValue: state.sourceImageType,
+                      decoration: InputDecoration(
+                        labelText: t.coordinate.source_type_label,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                    ),
-                    items: [
-                      DropdownMenuItem(
-                        value: CoordinateSourceImageType.illustration,
-                        child: Text(t.coordinate.source_type_illustration),
+                      items: [
+                        DropdownMenuItem(
+                          value: CoordinateSourceImageType.illustration,
+                          child: Text(
+                            t.coordinate.source_type_illustration,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: CoordinateSourceImageType.real,
+                          child: Text(
+                            t.coordinate.source_type_real,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          onSourceImageTypeChanged(value);
+                        }
+                      },
+                    );
+                final backgroundField =
+                    DropdownButtonFormField<CoordinateBackgroundMode>(
+                      isExpanded: true,
+                      initialValue: state.backgroundMode,
+                      decoration: InputDecoration(
+                        labelText: t.coordinate.background_label,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      DropdownMenuItem(
-                        value: CoordinateSourceImageType.real,
-                        child: Text(t.coordinate.source_type_real),
-                      ),
+                      items: [
+                        DropdownMenuItem(
+                          value: CoordinateBackgroundMode.keep,
+                          child: Text(
+                            t.coordinate.background_keep,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: CoordinateBackgroundMode.includeInPrompt,
+                          child: Text(
+                            t.coordinate.background_include,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        DropdownMenuItem(
+                          value: CoordinateBackgroundMode.aiAuto,
+                          child: Text(
+                            t.coordinate.background_auto,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          onBackgroundModeChanged(value);
+                        }
+                      },
+                    );
+                if (compact) {
+                  return Column(
+                    children: [
+                      sourceTypeField,
+                      const SizedBox(height: 10),
+                      backgroundField,
                     ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        onSourceImageTypeChanged(value);
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: DropdownButtonFormField<CoordinateBackgroundMode>(
-                    initialValue: state.backgroundMode,
-                    decoration: InputDecoration(
-                      labelText: t.coordinate.background_label,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    items: [
-                      DropdownMenuItem(
-                        value: CoordinateBackgroundMode.keep,
-                        child: Text(t.coordinate.background_keep),
-                      ),
-                      DropdownMenuItem(
-                        value: CoordinateBackgroundMode.includeInPrompt,
-                        child: Text(t.coordinate.background_include),
-                      ),
-                      DropdownMenuItem(
-                        value: CoordinateBackgroundMode.aiAuto,
-                        child: Text(t.coordinate.background_auto),
-                      ),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) {
-                        onBackgroundModeChanged(value);
-                      }
-                    },
-                  ),
-                ),
-              ],
+                  );
+                }
+                return Row(
+                  children: [
+                    Expanded(child: sourceTypeField),
+                    const SizedBox(width: 10),
+                    Expanded(child: backgroundField),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: DropdownButtonFormField<CoordinateModelTier>(
-                    initialValue: state.modelTier,
-                    decoration: InputDecoration(
-                      labelText: t.coordinate.model_tier_label,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final compact = constraints.maxWidth < 560;
+                final modelField = DropdownButtonFormField<CoordinateModelTier>(
+                  isExpanded: true,
+                  itemHeight: null,
+                  initialValue: state.modelTier,
+                  decoration: InputDecoration(
+                    labelText: t.coordinate.model_tier_label,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    items: CoordinateModelTier.values
-                        .map(
-                          (tier) => DropdownMenuItem(
-                            value: tier,
-                            child: Text(_tierLabel(context, tier)),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      if (value != null) {
-                        onModelTierChanged(value);
-                      }
-                    },
                   ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: DropdownButtonFormField<int>(
-                    initialValue: state.outputCount,
-                    decoration: InputDecoration(
-                      labelText: t.coordinate.output_count_label,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
+                  selectedItemBuilder: (context) => CoordinateModelTier.values
+                      .map(
+                        (tier) => Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            _tierShortLabel(context, tier),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  items: CoordinateModelTier.values
+                      .map(
+                        (tier) => DropdownMenuItem(
+                          value: tier,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              _tierLabel(context, tier),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
+                            ),
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      onModelTierChanged(value);
+                    }
+                  },
+                );
+                final countField = DropdownButtonFormField<int>(
+                  isExpanded: true,
+                  initialValue: state.outputCount,
+                  decoration: InputDecoration(
+                    labelText: t.coordinate.output_count_label,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    items: const [1, 2, 3, 4]
-                        .map(
-                          (count) => DropdownMenuItem(
-                            value: count,
-                            child: Text('$count'),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (value) {
-                      if (value != null) {
-                        onOutputCountChanged(value);
-                      }
-                    },
                   ),
-                ),
-              ],
+                  items: const [1, 2, 3, 4]
+                      .map(
+                        (count) => DropdownMenuItem(
+                          value: count,
+                          child: Text('$count'),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    if (value != null) {
+                      onOutputCountChanged(value);
+                    }
+                  },
+                );
+                if (compact) {
+                  return Column(
+                    children: [
+                      modelField,
+                      const SizedBox(height: 10),
+                      countField,
+                    ],
+                  );
+                }
+                return Row(
+                  children: [
+                    Expanded(child: modelField),
+                    const SizedBox(width: 10),
+                    Expanded(child: countField),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 10),
             Text(
@@ -269,23 +338,40 @@ class CoordinateGenerationFormSection extends StatelessWidget {
       CoordinateModelTier.pro4k => t.coordinate.model_tier_pro4k,
     };
   }
+
+  String _tierShortLabel(BuildContext context, CoordinateModelTier tier) {
+    return switch (tier) {
+      CoordinateModelTier.light05k => 'Nano Banana 2 | 0.5K',
+      CoordinateModelTier.standard1k => 'Nano Banana 2 | 1K',
+      CoordinateModelTier.pro1k => 'Nano Banana Pro | 1K',
+      CoordinateModelTier.pro2k => 'Nano Banana Pro | 2K',
+      CoordinateModelTier.pro4k => 'Nano Banana Pro | 4K',
+    };
+  }
 }
 
-class _UploadMockSelector extends StatelessWidget {
-  const _UploadMockSelector({
-    required this.onSelectMockUpload,
+class _UploadLibrarySelector extends StatefulWidget {
+  const _UploadLibrarySelector({
+    required this.onSelectUploadFromLibrary,
     required this.selectedFileName,
     required this.selectedMeta,
   });
 
-  final void Function({
+  final Future<void> Function({
     required String fileName,
     required String mimeType,
     required int sizeBytes,
   })
-  onSelectMockUpload;
+  onSelectUploadFromLibrary;
   final String? selectedFileName;
   final String selectedMeta;
+
+  @override
+  State<_UploadLibrarySelector> createState() => _UploadLibrarySelectorState();
+}
+
+class _UploadLibrarySelectorState extends State<_UploadLibrarySelector> {
+  bool _isPicking = false;
 
   @override
   Widget build(BuildContext context) {
@@ -294,49 +380,73 @@ class _UploadMockSelector extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          t.coordinate.upload_mock_title,
+          t.coordinate.upload_library_title,
           style: Theme.of(context).textTheme.labelLarge,
         ),
         const SizedBox(height: 8),
-        Wrap(
-          spacing: 8,
-          runSpacing: 8,
+        Row(
           children: [
-            OutlinedButton(
-              onPressed: () => onSelectMockUpload(
-                fileName: 'sample.png',
-                mimeType: 'image/png',
-                sizeBytes: 1 * 1024 * 1024,
+            OutlinedButton.icon(
+              onPressed: _isPicking
+                  ? null
+                  : () async {
+                      setState(() => _isPicking = true);
+                      try {
+                        final picker = ImagePicker();
+                        final picked = await picker.pickImage(
+                          source: ImageSource.gallery,
+                        );
+                        if (picked == null) {
+                          return;
+                        }
+                        final file = File(picked.path);
+                        final sizeBytes = await file.length();
+                        final mimeType = _inferMimeType(picked.name);
+                        await widget.onSelectUploadFromLibrary(
+                          fileName: picked.name,
+                          mimeType: mimeType,
+                          sizeBytes: sizeBytes,
+                        );
+                      } finally {
+                        if (mounted) {
+                          setState(() => _isPicking = false);
+                        }
+                      }
+                    },
+              icon: Icon(
+                _isPicking ? Icons.hourglass_top : Icons.photo_library_outlined,
               ),
-              child: Text(t.coordinate.upload_pick_valid),
-            ),
-            OutlinedButton(
-              onPressed: () => onSelectMockUpload(
-                fileName: 'oversized.webp',
-                mimeType: 'image/webp',
-                sizeBytes: 12 * 1024 * 1024,
+              label: Text(
+                _isPicking
+                    ? t.coordinate.upload_library_loading
+                    : t.coordinate.upload_library_action,
               ),
-              child: Text(t.coordinate.upload_pick_large),
-            ),
-            OutlinedButton(
-              onPressed: () => onSelectMockUpload(
-                fileName: 'unsupported.heic',
-                mimeType: 'image/heic',
-                sizeBytes: 2 * 1024 * 1024,
-              ),
-              child: Text(t.coordinate.upload_pick_unsupported),
             ),
           ],
         ),
         const SizedBox(height: 8),
         Text(
-          selectedFileName == null
+          widget.selectedFileName == null
               ? t.coordinate.upload_none_selected
-              : '$selectedFileName • $selectedMeta',
+              : '${widget.selectedFileName} • ${widget.selectedMeta}',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );
+  }
+
+  String _inferMimeType(String fileName) {
+    final lower = fileName.toLowerCase();
+    if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) {
+      return 'image/jpeg';
+    }
+    if (lower.endsWith('.png')) {
+      return 'image/png';
+    }
+    if (lower.endsWith('.webp')) {
+      return 'image/webp';
+    }
+    return 'application/octet-stream';
   }
 }
 

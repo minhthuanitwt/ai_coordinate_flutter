@@ -214,17 +214,14 @@ class TranslationsCoordinateEn {
 	/// en: 'Stock'
 	String get source_mode_stock => 'Stock';
 
-	/// en: 'Upload sample'
-	String get upload_mock_title => 'Upload sample';
+	/// en: 'Source image upload'
+	String get upload_library_title => 'Source image upload';
 
-	/// en: 'Use sample PNG (1MB)'
-	String get upload_pick_valid => 'Use sample PNG (1MB)';
+	/// en: 'Choose from library'
+	String get upload_library_action => 'Choose from library';
 
-	/// en: 'Use oversized WebP (12MB)'
-	String get upload_pick_large => 'Use oversized WebP (12MB)';
-
-	/// en: 'Use unsupported HEIC'
-	String get upload_pick_unsupported => 'Use unsupported HEIC';
+	/// en: 'Opening library...'
+	String get upload_library_loading => 'Opening library...';
 
 	/// en: 'No upload selected'
 	String get upload_none_selected => 'No upload selected';
@@ -259,23 +256,23 @@ class TranslationsCoordinateEn {
 	/// en: 'AI auto background'
 	String get background_auto => 'AI auto background';
 
-	/// en: 'Model tier'
-	String get model_tier_label => 'Model tier';
+	/// en: 'Select a generation model'
+	String get model_tier_label => 'Select a generation model';
 
-	/// en: 'Light (0.5K)'
-	String get model_tier_light => 'Light (0.5K)';
+	/// en: 'Light model: Nano Banana 2 | 0.5K (10 Percoins / image)'
+	String get model_tier_light => 'Light model: Nano Banana 2 | 0.5K (10 Percoins / image)';
 
-	/// en: 'Standard (1K)'
-	String get model_tier_standard => 'Standard (1K)';
+	/// en: 'Standard model: Nano Banana 2 | 1K (20 Percoins / image)'
+	String get model_tier_standard => 'Standard model: Nano Banana 2 | 1K (20 Percoins / image)';
 
-	/// en: 'Pro (1K)'
-	String get model_tier_pro1k => 'Pro (1K)';
+	/// en: 'High-fidelity model: Nano Banana Pro | 1K (50 Percoins / image)'
+	String get model_tier_pro1k => 'High-fidelity model: Nano Banana Pro | 1K (50 Percoins / image)';
 
-	/// en: 'Pro (2K)'
-	String get model_tier_pro2k => 'Pro (2K)';
+	/// en: 'High-fidelity model: Nano Banana Pro | 2K (80 Percoins / image)'
+	String get model_tier_pro2k => 'High-fidelity model: Nano Banana Pro | 2K (80 Percoins / image)';
 
-	/// en: 'Pro (4K)'
-	String get model_tier_pro4k => 'Pro (4K)';
+	/// en: 'High-fidelity model: Nano Banana Pro | 4K (100 Percoins / image)'
+	String get model_tier_pro4k => 'High-fidelity model: Nano Banana Pro | 4K (100 Percoins / image)';
 
 	/// en: 'Output count'
 	String get output_count_label => 'Output count';
@@ -774,10 +771,9 @@ extension on Translations {
 			'coordinate.progress_section_title' => 'Generation progress',
 			'coordinate.source_mode_upload' => 'Upload',
 			'coordinate.source_mode_stock' => 'Stock',
-			'coordinate.upload_mock_title' => 'Upload sample',
-			'coordinate.upload_pick_valid' => 'Use sample PNG (1MB)',
-			'coordinate.upload_pick_large' => 'Use oversized WebP (12MB)',
-			'coordinate.upload_pick_unsupported' => 'Use unsupported HEIC',
+			'coordinate.upload_library_title' => 'Source image upload',
+			'coordinate.upload_library_action' => 'Choose from library',
+			'coordinate.upload_library_loading' => 'Opening library...',
 			'coordinate.upload_none_selected' => 'No upload selected',
 			'coordinate.stock_picker_title' => 'Select stock source',
 			'coordinate.prompt_input_label' => 'Prompt',
@@ -789,12 +785,12 @@ extension on Translations {
 			'coordinate.background_keep' => 'Keep current background',
 			'coordinate.background_include' => 'Include background in prompt',
 			'coordinate.background_auto' => 'AI auto background',
-			'coordinate.model_tier_label' => 'Model tier',
-			'coordinate.model_tier_light' => 'Light (0.5K)',
-			'coordinate.model_tier_standard' => 'Standard (1K)',
-			'coordinate.model_tier_pro1k' => 'Pro (1K)',
-			'coordinate.model_tier_pro2k' => 'Pro (2K)',
-			'coordinate.model_tier_pro4k' => 'Pro (4K)',
+			'coordinate.model_tier_label' => 'Select a generation model',
+			'coordinate.model_tier_light' => 'Light model: Nano Banana 2 | 0.5K (10 Percoins / image)',
+			'coordinate.model_tier_standard' => 'Standard model: Nano Banana 2 | 1K (20 Percoins / image)',
+			'coordinate.model_tier_pro1k' => 'High-fidelity model: Nano Banana Pro | 1K (50 Percoins / image)',
+			'coordinate.model_tier_pro2k' => 'High-fidelity model: Nano Banana Pro | 2K (80 Percoins / image)',
+			'coordinate.model_tier_pro4k' => 'High-fidelity model: Nano Banana Pro | 4K (100 Percoins / image)',
 			'coordinate.output_count_label' => 'Output count',
 			'coordinate.estimated_cost_label' => 'Estimated cost: {{amount}} percoins • Balance: {{balance}}',
 			'coordinate.plan_limit_notice' => 'Current plan allows up to {{max}} outputs per request.',

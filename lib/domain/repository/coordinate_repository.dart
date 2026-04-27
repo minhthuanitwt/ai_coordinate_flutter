@@ -273,11 +273,11 @@ class SupabaseCoordinateRepository implements CoordinateRepository {
 
 int getPercoinCost(CoordinateModelTier modelTier) {
   return switch (modelTier) {
-    CoordinateModelTier.light05k => 1,
-    CoordinateModelTier.standard1k => 2,
-    CoordinateModelTier.pro1k => 3,
-    CoordinateModelTier.pro2k => 5,
-    CoordinateModelTier.pro4k => 8,
+    CoordinateModelTier.light05k => 10,
+    CoordinateModelTier.standard1k => 20,
+    CoordinateModelTier.pro1k => 50,
+    CoordinateModelTier.pro2k => 80,
+    CoordinateModelTier.pro4k => 100,
   };
 }
 

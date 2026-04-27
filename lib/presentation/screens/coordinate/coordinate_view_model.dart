@@ -147,11 +147,11 @@ class CoordinateViewModel extends AutoDisposeNotifier<CoordinateState> {
     );
   }
 
-  void setMockUpload({
+  Future<void> setUploadFromLibrary({
     required String fileName,
     required String mimeType,
     required int sizeBytes,
-  }) {
+  }) async {
     state = state.copyWith(
       sourceInput: CoordinateSourceImageInput(
         mode: CoordinateImageSourceMode.upload,
