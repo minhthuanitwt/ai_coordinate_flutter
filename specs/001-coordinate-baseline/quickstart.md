@@ -38,11 +38,11 @@ in before accessing `coordinate`, `challenge`, `notifications`, and `my-page`.
 ## Reference Inputs
 
 - Flutter router and shell:
-  - `/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/routes/app_router.dart`
-  - `/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/shell/app_shell_page.dart`
+  - `lib/routes/app_router.dart`
+  - `lib/presentation/screens/shell/app_shell_page.dart`
 - Supabase bootstrap:
-  - `/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/services/supabase_service.dart`
-  - `/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/providers/app_bootstrap_provider.dart`
+  - `lib/services/supabase_service.dart`
+  - `lib/presentation/providers/app_bootstrap_provider.dart`
 - Next.js reference:
   - `/Users/dongdm/Develop/Source/doi/ai_coordinate/lib/auth.ts`
   - `/Users/dongdm/Develop/Source/doi/ai_coordinate/messages/ja.ts`

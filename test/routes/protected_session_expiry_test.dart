@@ -6,7 +6,9 @@ import 'package:ai_coordinate_flutter/presentation/screens/auth/login_page.dart'
 import '../test_app.dart';
 
 void main() {
-  testWidgets('signing out from protected flow returns to login', (tester) async {
+  testWidgets('signing out from protected flow returns to login', (
+    tester,
+  ) async {
     await pumpPerstaApp(tester);
 
     await tester.tap(find.text('Coordinate'));
@@ -17,7 +19,13 @@ void main() {
     await tester.tap(find.text('Log in').last);
     await tester.pumpAndSettle();
 
-    await tester.tap(find.text('Log out'));
+    await tester.tap(find.text('My Page'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Log out').last);
     await tester.pump(const Duration(milliseconds: 400));
     await tester.pumpAndSettle();
 

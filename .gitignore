@@ -4,6 +4,8 @@
 *.pyc
 *.swp
 .DS_Store
+Thumbs.db
+.env*
 .atom/
 .build/
 .buildlog/

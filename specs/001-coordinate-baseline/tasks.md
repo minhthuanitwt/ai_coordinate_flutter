@@ -17,9 +17,9 @@
 
 **Purpose**: Restore the minimum auth scaffolding and generated-file workflow needed for the feature.
 
-- [ ] T001 Add auth-related dependencies and generator prerequisites in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/pubspec.yaml
-- [X] T002 [P] Create the auth screen directory structure under /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/
-- [X] T003 [P] Add source localization keys for login and auth-required messaging in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/assets/i18n/en.i18n.json and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/assets/i18n/ja.i18n.json
+- [ ] T001 Add auth-related dependencies and generator prerequisites in pubspec.yaml
+- [X] T002 [P] Create the auth screen directory structure under lib/presentation/screens/auth/
+- [X] T003 [P] Add source localization keys for login and auth-required messaging in assets/i18n/en.i18n.json and assets/i18n/ja.i18n.json
 
 ---
 
@@ -29,14 +29,14 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete.
 
-- [X] T004 Create the auth session model in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/core/models/auth_session.dart
-- [X] T005 [P] Create the auth repository contract in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/domain/repository/auth_repository.dart
-- [X] T006 [P] Implement Supabase-backed auth repository methods in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/services/supabase_auth_repository.dart
-- [X] T007 Create shared auth/session providers for current user, auth state, and redirect target in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/providers/auth_session_provider.dart
-- [ ] T008 Update Supabase bootstrap behavior for auth-aware initialization in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/services/supabase_service.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/providers/app_bootstrap_provider.dart
-- [X] T009 Add the login route and protected destination wiring in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/routes/app_router.dart
-- [ ] T010 Regenerate router artifacts in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/routes/app_router.gr.dart via build_runner
-- [X] T011 Regenerate localization artifacts in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/i18n/strings.g.dart, /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/i18n/strings_en.g.dart, and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/i18n/strings_ja.g.dart via slang
+- [X] T004 Create the auth session model in lib/core/models/auth_session.dart
+- [X] T005 [P] Create the auth repository contract in lib/domain/repository/auth_repository.dart
+- [X] T006 [P] Implement Supabase-backed auth repository methods in lib/services/supabase_auth_repository.dart
+- [X] T007 Create shared auth/session providers for current user, auth state, and redirect target in lib/presentation/providers/auth_session_provider.dart
+- [ ] T008 Update Supabase bootstrap behavior for auth-aware initialization in lib/services/supabase_service.dart and lib/presentation/providers/app_bootstrap_provider.dart
+- [X] T009 Add the login route and protected destination wiring in lib/routes/app_router.dart
+- [ ] T010 Regenerate router artifacts in lib/routes/app_router.gr.dart via build_runner
+- [X] T011 Regenerate localization artifacts in lib/i18n/strings.g.dart, lib/i18n/strings_en.g.dart, and lib/i18n/strings_ja.g.dart via slang
 
 **Checkpoint**: Foundation ready. Auth state, routing hooks, and generated artifacts are available for story work.
 
@@ -50,13 +50,13 @@
 
 ### Tests for User Story 1
 
-- [X] T012 [P] [US1] Add a guest-home routing test in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/test/routes/public_home_route_test.dart
+- [X] T012 [P] [US1] Add a guest-home routing test in test/routes/public_home_route_test.dart
 
 ### Implementation for User Story 1
 
-- [ ] T013 [US1] Update app router/bootstrap composition for auth-aware public entry in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/app.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/main.dart
-- [X] T014 [US1] Update the shell tab configuration so `home` remains public and protected tabs are identifiable in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/shell/app_shell_page.dart
-- [ ] T015 [US1] Ensure public home behavior stays unchanged with the auth-aware shell in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/home/home_page.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/home/home_view_model.dart
+- [ ] T013 [US1] Update app router/bootstrap composition for auth-aware public entry in lib/app.dart and lib/main.dart
+- [X] T014 [US1] Update the shell tab configuration so `home` remains public and protected tabs are identifiable in lib/presentation/screens/shell/app_shell_page.dart
+- [ ] T015 [US1] Ensure public home behavior stays unchanged with the auth-aware shell in lib/presentation/screens/home/home_page.dart and lib/presentation/screens/home/home_view_model.dart
 
 **Checkpoint**: Guests can still use `home` independently without being forced into authentication.
 
@@ -70,16 +70,16 @@
 
 ### Tests for User Story 2
 
-- [X] T016 [P] [US2] Add login form state and submission tests in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/test/presentation/auth/login_view_model_test.dart
-- [X] T017 [P] [US2] Add protected-tab guest redirection tests in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/test/routes/protected_tab_redirect_test.dart
+- [X] T016 [P] [US2] Add login form state and submission tests in test/presentation/auth/login_view_model_test.dart
+- [X] T017 [P] [US2] Add protected-tab guest redirection tests in test/routes/protected_tab_redirect_test.dart
 
 ### Implementation for User Story 2
 
-- [X] T018 [P] [US2] Create login page state in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/login_state.dart
-- [X] T019 [P] [US2] Create login page view-model in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/login_view_model.dart
-- [X] T020 [US2] Build the login page UI in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/login_page.dart
-- [X] T021 [US2] Add shell-level protected-tab interception and redirect-target persistence in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/shell/app_shell_page.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/providers/auth_session_provider.dart
-- [X] T022 [US2] Add post-login redirect handling from login back into protected tabs in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/login_view_model.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/auth/login_page.dart
+- [X] T018 [P] [US2] Create login page state in lib/presentation/screens/auth/login_state.dart
+- [X] T019 [P] [US2] Create login page view-model in lib/presentation/screens/auth/login_view_model.dart
+- [X] T020 [US2] Build the login page UI in lib/presentation/screens/auth/login_page.dart
+- [X] T021 [US2] Add shell-level protected-tab interception and redirect-target persistence in lib/presentation/screens/shell/app_shell_page.dart and lib/presentation/providers/auth_session_provider.dart
+- [X] T022 [US2] Add post-login redirect handling from login back into protected tabs in lib/presentation/screens/auth/login_view_model.dart and lib/presentation/screens/auth/login_page.dart
 
 **Checkpoint**: Guests are consistently redirected to login for protected tabs, and successful login returns them to the requested destination.
 
@@ -93,16 +93,16 @@
 
 ### Tests for User Story 3
 
-- [X] T023 [P] [US3] Add authenticated coordinate access tests in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/test/presentation/coordinate/coordinate_auth_gate_test.dart
-- [X] T024 [P] [US3] Add session-expiry redirect tests for protected tabs in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/test/routes/protected_session_expiry_test.dart
+- [X] T023 [P] [US3] Add authenticated coordinate access tests in test/presentation/coordinate/coordinate_auth_gate_test.dart
+- [X] T024 [P] [US3] Add session-expiry redirect tests for protected tabs in test/routes/protected_session_expiry_test.dart
 
 ### Implementation for User Story 3
 
-- [X] T025 [US3] Reintroduce auth-aware loading and empty-state handling for the coordinate tab in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/coordinate/coordinate_state.dart and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/coordinate/coordinate_view_model.dart
-- [X] T026 [US3] Prevent guest rendering and handle session loss in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/coordinate/coordinate_page.dart
-- [X] T027 [P] [US3] Add protected access handling for /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/challenge/challenge_page.dart
-- [X] T028 [P] [US3] Add protected access handling for /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/notifications/notifications_page.dart
-- [X] T029 [P] [US3] Add protected access handling for /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/lib/presentation/screens/my_profile/my_profile_page.dart
+- [X] T025 [US3] Reintroduce auth-aware loading and empty-state handling for the coordinate tab in lib/presentation/screens/coordinate/coordinate_state.dart and lib/presentation/screens/coordinate/coordinate_view_model.dart
+- [X] T026 [US3] Prevent guest rendering and handle session loss in lib/presentation/screens/coordinate/coordinate_page.dart
+- [X] T027 [P] [US3] Add protected access handling for lib/presentation/screens/challenge/challenge_page.dart
+- [X] T028 [P] [US3] Add protected access handling for lib/presentation/screens/notifications/notifications_page.dart
+- [X] T029 [P] [US3] Add protected access handling for lib/presentation/screens/my_profile/my_profile_page.dart
 
 **Checkpoint**: Authenticated users can use protected tabs, and expired sessions no longer leave stale private content on screen.
 
@@ -112,9 +112,9 @@
 
 **Purpose**: Final verification and cleanup across all stories.
 
-- [X] T030 [P] Update auth-gating copy consistency in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/assets/i18n/en.i18n.json and /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/assets/i18n/ja.i18n.json
-- [ ] T031 Run generated-file refresh for routing and localization in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter via `fvm dart run build_runner build -d` and `fvm dart run slang`
-- [X] T032 Run verification for the feature in /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter via `fvm dart analyze lib` and targeted `flutter test` commands
+- [X] T030 [P] Update auth-gating copy consistency in assets/i18n/en.i18n.json and assets/i18n/ja.i18n.json
+- [ ] T031 Run generated-file refresh for routing and localization in . via `fvm dart run build_runner build -d` and `fvm dart run slang`
+- [X] T032 Run verification for the feature in . via `fvm dart analyze lib` and targeted `flutter test` commands
 
 ---
 

@@ -193,6 +193,177 @@ class TranslationsCoordinateEn {
 
 	// Translations
 
+	/// en: 'Coordinate'
+	String get coordinate_page_title => 'Coordinate';
+
+	/// en: 'Create coordinate outputs with source-aware generation and track progress in real time.'
+	String get coordinate_page_subtitle => 'Create coordinate outputs with source-aware generation and track progress in real time.';
+
+	/// en: 'Generate'
+	String get generation_section_title => 'Generate';
+
+	/// en: 'Generated results'
+	String get results_section_title => 'Generated results';
+
+	/// en: 'Generation progress'
+	String get progress_section_title => 'Generation progress';
+
+	/// en: 'Upload'
+	String get source_mode_upload => 'Upload';
+
+	/// en: 'Stock'
+	String get source_mode_stock => 'Stock';
+
+	/// en: 'Upload sample'
+	String get upload_mock_title => 'Upload sample';
+
+	/// en: 'Use sample PNG (1MB)'
+	String get upload_pick_valid => 'Use sample PNG (1MB)';
+
+	/// en: 'Use oversized WebP (12MB)'
+	String get upload_pick_large => 'Use oversized WebP (12MB)';
+
+	/// en: 'Use unsupported HEIC'
+	String get upload_pick_unsupported => 'Use unsupported HEIC';
+
+	/// en: 'No upload selected'
+	String get upload_none_selected => 'No upload selected';
+
+	/// en: 'Select stock source'
+	String get stock_picker_title => 'Select stock source';
+
+	/// en: 'Prompt'
+	String get prompt_input_label => 'Prompt';
+
+	/// en: 'Describe outfit/style changes to generate'
+	String get prompt_input_hint => 'Describe outfit/style changes to generate';
+
+	/// en: 'Source image type'
+	String get source_type_label => 'Source image type';
+
+	/// en: 'Illustration'
+	String get source_type_illustration => 'Illustration';
+
+	/// en: 'Real photo'
+	String get source_type_real => 'Real photo';
+
+	/// en: 'Background mode'
+	String get background_label => 'Background mode';
+
+	/// en: 'Keep current background'
+	String get background_keep => 'Keep current background';
+
+	/// en: 'Include background in prompt'
+	String get background_include => 'Include background in prompt';
+
+	/// en: 'AI auto background'
+	String get background_auto => 'AI auto background';
+
+	/// en: 'Model tier'
+	String get model_tier_label => 'Model tier';
+
+	/// en: 'Light (0.5K)'
+	String get model_tier_light => 'Light (0.5K)';
+
+	/// en: 'Standard (1K)'
+	String get model_tier_standard => 'Standard (1K)';
+
+	/// en: 'Pro (1K)'
+	String get model_tier_pro1k => 'Pro (1K)';
+
+	/// en: 'Pro (2K)'
+	String get model_tier_pro2k => 'Pro (2K)';
+
+	/// en: 'Pro (4K)'
+	String get model_tier_pro4k => 'Pro (4K)';
+
+	/// en: 'Output count'
+	String get output_count_label => 'Output count';
+
+	/// en: 'Estimated cost: {{amount}} percoins • Balance: {{balance}}'
+	String get estimated_cost_label => 'Estimated cost: {{amount}} percoins • Balance: {{balance}}';
+
+	/// en: 'Current plan allows up to {{max}} outputs per request.'
+	String get plan_limit_notice => 'Current plan allows up to {{max}} outputs per request.';
+
+	/// en: 'Generate'
+	String get generating_button_ready => 'Generate';
+
+	/// en: 'Generating...'
+	String get generating_button_loading => 'Generating...';
+
+	/// en: 'Balance: {{amount}}'
+	String get balance_chip => 'Balance: {{amount}}';
+
+	/// en: 'Buy Percoins'
+	String get buy_percoins_action => 'Buy Percoins';
+
+	/// en: 'Still processing in the background. Re-open Coordinate to auto-resume tracking.'
+	String get still_processing_notice => 'Still processing in the background. Re-open Coordinate to auto-resume tracking.';
+
+	/// en: 'Queued'
+	String get status_queued => 'Queued';
+
+	/// en: 'Processing'
+	String get status_processing => 'Processing';
+
+	/// en: 'Charging'
+	String get status_charging => 'Charging';
+
+	/// en: 'Generating'
+	String get status_generating => 'Generating';
+
+	/// en: 'Uploading'
+	String get status_uploading => 'Uploading';
+
+	/// en: 'Persisting'
+	String get status_persisting => 'Persisting';
+
+	/// en: 'Completed'
+	String get status_completed => 'Completed';
+
+	/// en: 'Failed'
+	String get status_failed => 'Failed';
+
+	/// en: 'Enter a prompt before generating.'
+	String get error_missing_prompt => 'Enter a prompt before generating.';
+
+	/// en: 'Prompt exceeds the allowed length.'
+	String get error_prompt_too_long => 'Prompt exceeds the allowed length.';
+
+	/// en: 'Select a source image before generating.'
+	String get error_missing_source => 'Select a source image before generating.';
+
+	/// en: 'Only JPG/PNG/WebP uploads are supported.'
+	String get error_unsupported_upload => 'Only JPG/PNG/WebP uploads are supported.';
+
+	/// en: 'Upload size must be 10MB or smaller.'
+	String get error_upload_too_large => 'Upload size must be 10MB or smaller.';
+
+	/// en: 'Selected count exceeds your current plan limit.'
+	String get error_upgrade_required => 'Selected count exceeds your current plan limit.';
+
+	/// en: 'You do not have enough percoins for this request.'
+	String get error_insufficient_balance => 'You do not have enough percoins for this request.';
+
+	/// en: 'Unable to submit generation right now.'
+	String get error_submit_failed => 'Unable to submit generation right now.';
+
+	/// en: 'Unable to load generated history.'
+	String get error_history_failed => 'Unable to load generated history.';
+
+	/// en: 'Unable to refresh generation progress.'
+	String get error_polling_failed => 'Unable to refresh generation progress.';
+
+	/// en: 'Something went wrong. Please try again.'
+	String get error_generic => 'Something went wrong. Please try again.';
+
+	/// en: 'No generated results yet.'
+	String get empty_results => 'No generated results yet.';
+
+	/// en: 'No prompt preview available.'
+	String get prompt_missing_fallback => 'No prompt preview available.';
+
 	/// en: 'Coordinate workspace'
 	String get title => 'Coordinate workspace';
 
@@ -596,6 +767,63 @@ extension on Translations {
 			'home.views_label' => 'Views',
 			'home.following_empty_title' => 'No followed creators yet',
 			'home.following_empty_body' => 'No posts from creators you follow yet. Follow more creators or check back later.',
+			'coordinate.coordinate_page_title' => 'Coordinate',
+			'coordinate.coordinate_page_subtitle' => 'Create coordinate outputs with source-aware generation and track progress in real time.',
+			'coordinate.generation_section_title' => 'Generate',
+			'coordinate.results_section_title' => 'Generated results',
+			'coordinate.progress_section_title' => 'Generation progress',
+			'coordinate.source_mode_upload' => 'Upload',
+			'coordinate.source_mode_stock' => 'Stock',
+			'coordinate.upload_mock_title' => 'Upload sample',
+			'coordinate.upload_pick_valid' => 'Use sample PNG (1MB)',
+			'coordinate.upload_pick_large' => 'Use oversized WebP (12MB)',
+			'coordinate.upload_pick_unsupported' => 'Use unsupported HEIC',
+			'coordinate.upload_none_selected' => 'No upload selected',
+			'coordinate.stock_picker_title' => 'Select stock source',
+			'coordinate.prompt_input_label' => 'Prompt',
+			'coordinate.prompt_input_hint' => 'Describe outfit/style changes to generate',
+			'coordinate.source_type_label' => 'Source image type',
+			'coordinate.source_type_illustration' => 'Illustration',
+			'coordinate.source_type_real' => 'Real photo',
+			'coordinate.background_label' => 'Background mode',
+			'coordinate.background_keep' => 'Keep current background',
+			'coordinate.background_include' => 'Include background in prompt',
+			'coordinate.background_auto' => 'AI auto background',
+			'coordinate.model_tier_label' => 'Model tier',
+			'coordinate.model_tier_light' => 'Light (0.5K)',
+			'coordinate.model_tier_standard' => 'Standard (1K)',
+			'coordinate.model_tier_pro1k' => 'Pro (1K)',
+			'coordinate.model_tier_pro2k' => 'Pro (2K)',
+			'coordinate.model_tier_pro4k' => 'Pro (4K)',
+			'coordinate.output_count_label' => 'Output count',
+			'coordinate.estimated_cost_label' => 'Estimated cost: {{amount}} percoins • Balance: {{balance}}',
+			'coordinate.plan_limit_notice' => 'Current plan allows up to {{max}} outputs per request.',
+			'coordinate.generating_button_ready' => 'Generate',
+			'coordinate.generating_button_loading' => 'Generating...',
+			'coordinate.balance_chip' => 'Balance: {{amount}}',
+			'coordinate.buy_percoins_action' => 'Buy Percoins',
+			'coordinate.still_processing_notice' => 'Still processing in the background. Re-open Coordinate to auto-resume tracking.',
+			'coordinate.status_queued' => 'Queued',
+			'coordinate.status_processing' => 'Processing',
+			'coordinate.status_charging' => 'Charging',
+			'coordinate.status_generating' => 'Generating',
+			'coordinate.status_uploading' => 'Uploading',
+			'coordinate.status_persisting' => 'Persisting',
+			'coordinate.status_completed' => 'Completed',
+			'coordinate.status_failed' => 'Failed',
+			'coordinate.error_missing_prompt' => 'Enter a prompt before generating.',
+			'coordinate.error_prompt_too_long' => 'Prompt exceeds the allowed length.',
+			'coordinate.error_missing_source' => 'Select a source image before generating.',
+			'coordinate.error_unsupported_upload' => 'Only JPG/PNG/WebP uploads are supported.',
+			'coordinate.error_upload_too_large' => 'Upload size must be 10MB or smaller.',
+			'coordinate.error_upgrade_required' => 'Selected count exceeds your current plan limit.',
+			'coordinate.error_insufficient_balance' => 'You do not have enough percoins for this request.',
+			'coordinate.error_submit_failed' => 'Unable to submit generation right now.',
+			'coordinate.error_history_failed' => 'Unable to load generated history.',
+			'coordinate.error_polling_failed' => 'Unable to refresh generation progress.',
+			'coordinate.error_generic' => 'Something went wrong. Please try again.',
+			'coordinate.empty_results' => 'No generated results yet.',
+			'coordinate.prompt_missing_fallback' => 'No prompt preview available.',
 			'coordinate.title' => 'Coordinate workspace',
 			'coordinate.description' => 'This protected area will host collaboration lanes, initiative tracking, and shared execution views.',
 			'coordinate.badge' => 'Protected preview',

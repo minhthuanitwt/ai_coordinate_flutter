@@ -1,6 +1,6 @@
 # Implementation Plan: Home and My Page Appbars
 
-**Branch**: `002-mypage-screen` | **Date**: 2026-04-24 | **Spec**: [/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/specs/002-mypage-screen/spec.md](/Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter/specs/002-mypage-screen/spec.md)
+**Branch**: `002-mypage-screen` | **Date**: 2026-04-24 | **Spec**: [spec.md](./spec.md)
 **Input**: Feature specification from `/specs/002-mypage-screen/spec.md`
 
 **Note**: This template is filled in by the `/speckit.plan` command. See `.specify/templates/plan-template.md` for the execution workflow.

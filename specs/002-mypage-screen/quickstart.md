@@ -9,7 +9,7 @@
 ## 2. Run app locally
 
 ```bash
-cd /Users/dongdm/Develop/Source/doi/new/ai_coordinate_flutter
+cd .
 fvm flutter run
 ```
 
